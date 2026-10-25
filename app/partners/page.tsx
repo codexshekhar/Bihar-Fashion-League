@@ -153,12 +153,12 @@ export default function PartnersPage() {
                 Join Bihar Fashion League in connecting emerging talent, creative communities, and brands through fashion, culture, and unforgettable runway experiences.
               </p>
               <div className="hero-fade hero-fade-delay-3 flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-                <Button asChild className="h-11 px-7 bg-white text-[#171717] hover:bg-white/90 text-sm tracking-wide">
+                <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
                   <Link href="/contact">
                     Become a Partner
                   </Link>
                 </Button>
-                <Button asChild variant="ghost" className="h-11 px-7 text-white hover:bg-white/10 text-sm tracking-wide">
+                <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
                   <Link href="#opportunities">
                     Explore Opportunities <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -341,7 +341,7 @@ export default function PartnersPage() {
               <p className="text-base sm:text-lg text-white/90 mb-9">
                 Bring your brand, expertise, or creative vision to the Bihar Fashion League community.
               </p>
-              <Button asChild className="h-11 px-7 bg-white text-[#171717] hover:bg-white/90 text-sm tracking-wide">
+              <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
                 <Link href="/contact">
                   Send Partnership Inquiry <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

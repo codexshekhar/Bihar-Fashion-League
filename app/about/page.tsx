@@ -341,9 +341,9 @@ export default function AboutPage() {
                 Become part of Bihar Fashion League as a participant, partner, or collaborator.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <Button asChild className="h-11 px-7 bg-white text-[#171717] hover:bg-white/90 text-sm tracking-wide">
-                  <Link href="/register/model">
-                    Register as a Model
+                <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
+                  <Link href="/register/model/apply">
+                    Register Now
                   </Link>
                 </Button>
                 <Button asChild variant="ghost" className="h-11 px-7 text-white hover:bg-white/10 text-sm tracking-wide">
