@@ -84,7 +84,7 @@ export default function HomePage() {
       </section>
 
       <section className="py-12 lg:py-16 bg-white">
-        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#171717] mb-3">Our Partners</h2>
             <p className="text-base text-[#66645F]">Brands that share our vision for fashion in Bihar.</p>
@@ -93,6 +93,25 @@ export default function HomePage() {
             sponsors={[
               { id: "idt", name: "IDT", logoUrl: "/images/Sponsers/IDT%20Logo%20White.png", logoAlt: "IDT", tier: "title" },
               { id: "sla", name: "SLA", logoUrl: "/images/Sponsers/SLA%20LOGO%20WITH%20TM.png", logoAlt: "SLA", tier: "event" },
+              { id: "s1", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.46.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s2", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.46%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s3", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.47.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s4", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.47%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s5", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.48.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s6", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.49.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s7", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.49%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s8", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.50.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s9", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.50%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s10", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.51.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s11", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.51%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s12", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.52.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s13", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.52%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s14", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.53.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s15", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.53%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s16", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.54.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s17", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.54%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s18", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.55.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
+              { id: "s19", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.55%20(1).jpeg", logoAlt: "Sponsor", tier: "collaborator" },
             ]}
           />
         </div>

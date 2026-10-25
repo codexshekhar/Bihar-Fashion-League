@@ -82,12 +82,12 @@ export function PartnersSection({
       `}</style>
       <div ref={gridRef} className="reveal">
         {sponsors.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-1">
             {sponsors.map((s, index) => (
               <div
                 key={s.id}
-                className="tile-reveal aspect-square flex items-center justify-center p-4 bg-[#f0f2ff] border border-white transition-all duration-300 hover:bg-[#e8ebff] focus-within:ring-1 focus-within:ring-[#171717]"
-                style={{ transitionDelay: `${Math.min(index, 11) * 40}ms` }}
+                className="tile-reveal aspect-square flex items-center justify-center p-3 bg-[#f0f2ff] border border-white transition-all duration-300 hover:bg-[#e8ebff] focus-within:ring-1 focus-within:ring-[#171717]"
+                style={{ transitionDelay: `${Math.min(index, 13) * 30}ms` }}
               >
                 <img
                   src={s.logoUrl}
