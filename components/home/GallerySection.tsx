@@ -1,94 +1,142 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-interface GalleryImageProps {
-  id: string;
-  src: string;
-  alt: string;
-  category: string;
+const GALLERY_PREVIEW = [
+  "/images/Gallery/BFL_2025_1.jpeg",
+  "/images/Gallery/BFL_2025_2.jpeg",
+  "/images/Gallery/BFL_2025_3.jpeg",
+  "/images/Gallery/BFL_2025_4.jpeg",
+  "/images/Gallery/BFL_2025_5.jpeg",
+  "/images/Gallery/BFL_2025_6.jpeg",
+  "/images/Gallery/BFL_2025_7.jpeg",
+  "/images/Gallery/BFL_2025_8.jpeg",
+];
+
+function useReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      element.classList.add("reveal-visible");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            element.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return ref;
 }
 
-export function GalleryCard({
-  id,
-  src,
-  alt,
-  category,
-}: GalleryImageProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      <Link href={`/gallery?category=${encodeURIComponent(category)}`} className="block group">
-        <div className="relative aspect-[4/5] overflow-hidden mb-6">
-          <img
-            src={src}
-            alt={alt}
-            className="h-full w-full object-cover object-center group-hover:scale-[1.05] transition-transform duration-1000"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          <div className="absolute bottom-6 left-6 z-10">
-            <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] font-light tracking-widest uppercase">
-              {category}
-            </span>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
+export function GallerySection() {
+  const headerRef = useReveal();
+  const gridRef = useReveal();
 
-export function GallerySection({
-  images = [],
-}: {
-  images?: Array<GalleryImageProps>;
-}) {
   return (
-    <section className="relative py-32 lg:py-48 bg-[#FAFAF9] overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col lg:flex-row justify-between items-end lg:items-start gap-12 mb-24"
-        >
+    <section className="relative py-16 lg:py-24 bg-[#F8F7F0]">
+      <style jsx global>{`
+        .reveal {
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 700ms ease, transform 700ms ease;
+        }
+        .reveal-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .tile-reveal {
+          opacity: 0;
+          transform: translateY(16px);
+          transition: opacity 650ms ease, transform 650ms ease;
+        }
+        .reveal-visible .tile-reveal {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .reveal,
+          .tile-reveal {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+      `}</style>
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        <div ref={headerRef} className="reveal flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-10 lg:mb-12">
           <div>
-            <span className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium tracking-widest uppercase">
-              Portfolio
-            </span>
-            <h2 className="text-6xl lg:text-7xl font-bold tracking-tighter mb-6 font-serif leading-[0.9]">
-              Gallery
-            </h2>
-            <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl font-light">
+            <p className="text-xs tracking-[0.32em] uppercase text-[#66645F] mb-4">Portfolio</p>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#171717] mb-3">Gallery</h2>
+            <p className="text-base text-[#66645F] max-w-2xl">
               Moments from the runway and beyond.
             </p>
           </div>
-          <Link href="/gallery" className="text-sm font-medium text-primary hover:text-primary/80 group flex items-center gap-3 tracking-wide">
-            View All Gallery <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+          <Link href="/gallery" className="text-sm text-[#171717] hover:opacity-80 flex items-center gap-2">
+            View All Gallery <ArrowRight className="h-4 w-4" />
           </Link>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {images.length > 0 ? (
-            images.map((img) => <GalleryCard key={img.id} {...img} />)
-          ) : (
-            <div className="col-span-full text-center py-32">
-              <p className="text-lg text-muted-foreground font-light">
-                Gallery images will be available soon.
-              </p>
-            </div>
-          )}
+        <div ref={gridRef} className="reveal grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6">
+          <div className="tile-reveal md:col-span-7 relative aspect-[16/10] overflow-hidden">
+            <Image
+              src={GALLERY_PREVIEW[0]}
+              alt="Bihar Fashion League runway moment"
+              fill
+              className="object-cover object-center hover:scale-[1.02] transition-transform duration-700"
+              sizes="(max-width: 768px) 100vw, 60vw"
+              loading="lazy"
+            />
+          </div>
+          <div className="md:col-span-5 grid grid-cols-2 gap-4 lg:gap-6">
+            {GALLERY_PREVIEW.slice(1, 5).map((src, idx) => (
+              <div key={idx} className="tile-reveal relative aspect-square overflow-hidden" style={{ transitionDelay: `${(idx + 1) * 60}ms` }}>
+                <Image
+                  src={src}
+                  alt={`Bihar Fashion League gallery moment ${idx + 2}`}
+                  fill
+                  className="object-cover object-center hover:scale-[1.02] transition-transform duration-700"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="md:col-span-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+            {GALLERY_PREVIEW.slice(5).map((src, idx) => (
+              <div key={idx} className="tile-reveal relative aspect-[4/5] overflow-hidden" style={{ transitionDelay: `${(idx + 5) * 60}ms` }}>
+                <Image
+                  src={src}
+                  alt={`Bihar Fashion League gallery moment ${idx + 6}`}
+                  fill
+                  className="object-cover object-center hover:scale-[1.02] transition-transform duration-700"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 h-px bg-black/5" />
     </section>
   );
 }
