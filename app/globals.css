@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1C1917;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #44403C;
+  --color-secondary-foreground: #FFFFFF;
+  --color-accent: #A16207;
+  --color-accent-foreground: #FFFFFF;
+  --color-muted: #E8ECF0;
+  --color-muted-foreground: #475569;
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: #D6D3D1;
+  --color-input: #D6D3D1;
+  --color-ring: #1C1917;
+  --color-background: #FAFAF9;
+  --color-foreground: #0C0A09;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #0C0A09;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Cormorant', serif;
+}
+
+:root {
+  --primary: #1C1917;
+  --primary-foreground: #FFFFFF;
+  --secondary: #44403C;
+  --secondary-foreground: #FFFFFF;
+  --accent: #A16207;
+  --accent-foreground: #FFFFFF;
+  --muted: #E8ECF0;
+  --muted-foreground: #475569;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #D6D3D1;
+  --input: #D6D3D1;
+  --ring: #1C1917;
+  --background: #FAFAF9;
+  --foreground: #0C0A09;
+  --card: #FFFFFF;
+  --card-foreground: #0C0A09;
+  --radius: 0.5rem;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "rlig" 1, "calt" 0.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
