@@ -15,7 +15,6 @@ const STEPS = [
   { id: 3, name: "Interests & Portfolio" },
   { id: 4, name: "Address & Emergency Contact" },
   { id: 5, name: "Review & Consent" },
-  { id: 6, name: "Payment" },
 ] as const;
 
 export type StepId = (typeof STEPS)[number]["id"];
@@ -131,8 +130,8 @@ export default function ApplyPage() {
       return;
     }
     setErrors({});
-    if (step < 6) {
-      setStep((s) => (s === 6 ? 6 : s + 1) as StepId);
+    if (step < 5) {
+      setStep((s) => (s + 1) as StepId);
     }
   };
 
@@ -213,6 +212,7 @@ export default function ApplyPage() {
     }
 
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       const response = await fetch("/api/register/model", {
         method: "POST",
@@ -228,9 +228,9 @@ export default function ApplyPage() {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        router.push(`/register/confirmation/${data.applicationNumber}`);
+        router.push(`/register/confirmation/${data.applicationNumber || data.applicationId}`);
       } else {
-        setSubmitError(data.error || "Failed to submit application");
+        setSubmitError(typeof data.error === "string" ? data.error : "Failed to submit application");
       }
     } catch (err) {
       setSubmitError("Network error. Please try again.");
@@ -243,7 +243,7 @@ export default function ApplyPage() {
     <main className="relative bg-[#FAFAF9] min-h-screen">
       <Header />
 
-      <section className="bg-white border-b border-border py-12">
+      <section className="bg-white border-b border-border pt-32 pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight mb-4">Model Registration</h1>
@@ -828,76 +828,52 @@ export default function ApplyPage() {
               </div>
             )}
 
-            {step === 6 && (
-              <div className="space-y-6">
-                <h2 className="text-2xl font-bold tracking-tight">Payment</h2>
-                <p className="text-muted-foreground">Complete your registration with a secure payment.</p>
-
-                <div className="bg-gray-50 p-6 rounded-xl border border-border">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-muted-foreground">Registration Fee</span>
-                    <span className="font-bold text-primary">₹{feeInfo.amountInr.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-muted-foreground">Category</span>
-                    <span className="font-medium">{CATEGORY_LABELS[formData.category]}</span>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg border border-border">
-                    <p className="text-sm text-muted-foreground mb-2">
-                      You will be redirected to Razorpay to complete payment securely.
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Your registration is not complete until payment is verified.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    type="button"
-                    onClick={goBack}
-                    variant="outline"
-                    className="w-full sm:w-auto px-8 py-4"
-                  >
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back
-                  </Button>
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto px-8 py-4"
-                  >
-                    {isSubmitting ? "Processing..." : "Proceed to Payment"}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-
-                {submitError && (
-                  <div className="mt-4 p-4 rounded-lg border border-destructive/50 bg-destructive/5 text-destructive">
-                    {submitError}
-                  </div>
-                )}
+            {step === 5 && (
+              <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-8">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={goBack}
+                  className="px-6 h-11"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-8 h-11 bg-[#171717] text-white hover:bg-[#171717]/90"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Application"}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </div>
             )}
 
-            {step !== 6 && (
-              <div className="flex justify-between mt-8">
-                {step > 1 && (
+            {step < 5 && (
+              <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-8">
+                {step > 1 ? (
                   <Button
                     type="button"
                     variant="outline"
                     onClick={goBack}
-                    className="px-8 py-3"
+                    className="px-6 h-11"
                   >
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
-                )}
+                ) : <div />}
                 <Button
                   type="button"
                   onClick={goNext}
-                  className="px-8 py-3"
+                  className="px-8 h-11 bg-[#171717] text-white hover:bg-[#171717]/90"
                 >
                   Next <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
+              </div>
+            )}
+
+            {submitError && step === 5 && (
+              <div className="p-4 rounded-lg border border-destructive/40 bg-destructive/5 text-destructive">
+                {submitError}
               </div>
             )}
           </form>
