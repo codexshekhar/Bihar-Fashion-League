@@ -103,36 +103,45 @@ export default function Header() {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[60] bg-[#F8F7F0]">
-          <div className="absolute top-4 right-4 sm:right-6">
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-2 text-[#171717] hover:text-[#171717]/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717]/20 rounded-md"
-              aria-label="Close navigation menu"
-            >
-              <X className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-          <nav className="mt-20 px-6 space-y-5 h-[calc(100vh-6rem)] overflow-y-auto">
-            {NAV_ITEMS.map((item) => (
+        <div className="fixed inset-0 h-[100dvh] w-screen bg-[#F8F7F0] z-[9999]">
+          <div className="flex h-full flex-col">
+            <div className="flex items-center justify-between px-4 sm:px-6 pt-4 sm:pt-6">
               <Link
-                key={item.href}
-                href={item.href}
+                href="/"
                 onClick={() => setIsOpen(false)}
-                className={cn(
-                  "text-2xl sm:text-3xl font-serif font-semibold tracking-tight block transition-colors",
-                  pathname === item.href ? "text-[#171717]" : "text-[#66645F]",
-                )}
+                className="flex items-center text-xl sm:text-2xl font-bold tracking-tight text-[#171717]"
               >
-                {item.name}
+                BFL
               </Link>
-            ))}
-            <div className="pt-6">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 text-[#171717] hover:text-[#171717]/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717]/20 rounded-md"
+                aria-label="Close navigation menu"
+              >
+                <X className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+            <nav className="flex-1 overflow-y-auto px-4 sm:px-6 mt-6 space-y-4">
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    "block text-2xl sm:text-3xl font-serif font-semibold tracking-tight py-2 transition-colors",
+                    pathname === item.href ? "text-[#171717]" : "text-[#66645F]",
+                  )}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+            <div className="px-4 sm:px-6 pb-6 pt-4">
               <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
                 <Link href="/register/model/apply" onClick={() => setIsOpen(false)}>Register Now</Link>
               </Button>
             </div>
-          </nav>
+          </div>
         </div>
       )}
     </header>
