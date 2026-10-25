@@ -177,12 +177,12 @@ export default function HomePage() {
                 Explore the registration process and take your first step toward the runway.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <Button asChild className="h-11 px-7 bg-white text-[#171717] hover:bg-white/90 text-sm tracking-wide">
-                  <Link href="/register/model">
+                <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
+                  <Link href="/register/model/apply">
                     Register Now
                   </Link>
                 </Button>
-                <Button asChild variant="ghost" className="h-11 px-7 text-white hover:bg-white/10 text-sm tracking-wide">
+                <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
                   <Link href="/gallery">
                     Explore Gallery <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
