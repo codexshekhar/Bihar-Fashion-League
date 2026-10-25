@@ -64,7 +64,7 @@ button {
   font-family: inherit;
 }
 
-button:not([class*="bg-"]) {
+button:not([class*="bg-"]):not([class*="text-"]) {
   background-color: var(--color-primary);
   color: var(--color-primary-foreground);
 }

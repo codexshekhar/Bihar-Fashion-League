@@ -116,14 +116,14 @@ function FaqAccordionItem({ question, answer }: FaqItemData) {
     <div className="border-b border-[#E5E2DC]">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between py-6 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-[#171717] focus-visible:ring-offset-2"
+        className="flex w-full items-center justify-between py-6 text-left bg-transparent text-[#171717] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#171717] focus-visible:ring-offset-2"
         aria-expanded={isOpen}
       >
         <span className="text-lg sm:text-xl font-serif text-[#171717] pr-6">{question}</span>
         {isOpen ? (
-          <Minus className="h-4 w-4 text-[#66645F] flex-shrink-0" />
+          <Minus className="h-4 w-4 text-[#171717] flex-shrink-0" />
         ) : (
-          <Plus className="h-4 w-4 text-[#66645F] flex-shrink-0" />
+          <Plus className="h-4 w-4 text-[#171717] flex-shrink-0" />
         )}
       </button>
       <div
