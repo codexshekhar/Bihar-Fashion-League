@@ -60,6 +60,20 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+button {
+  font-family: inherit;
+}
+
+button:not([class*="bg-"]) {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
