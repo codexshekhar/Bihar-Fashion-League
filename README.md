@@ -117,3 +117,46 @@ Ensure your Supabase project is in the correct region and RLS policies are enabl
 ## License
 
 Private — Bihar Fashion League
+
+
+## Admin Authentication Setup
+
+### 1. Local Configuration
+1. Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+2. Configure the required variables in `.env.local`:
+   - `NEXT_PUBLIC_SUPABASE_URL` - From Supabase Dashboard → Settings → API
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - From Supabase Dashboard → Settings → API (anon/public key). Never use service-role key in browser.
+   - `ADMIN_EMAIL_ALLOWLIST` - Comma-separated emails authorized for admin access (e.g. `piyush@biharfashionleague.com`). Case-insensitive.
+   - `SUPABASE_SERVICE_ROLE_KEY` - Server-side only (never commit/expose to browser)
+   - `SESSION_SECRET` - Generate with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
+
+`.env.local` is gitignored (see `.gitignore`).
+
+### 2. Supabase Administrator Provisioning
+Supabase Auth and admin authorization are separate:
+1. Go to [Supabase Dashboard](https://app.supabase.com) → Project → Authentication → Users → Add user
+2. Email: `piyush@biharfashionleague.com`
+3. Create a strong password securely (do **not** commit passwords to docs/git). Confirm the user's email if required by your auth settings.
+4. Ensure the email matches `ADMIN_EMAIL_ALLOWLIST`.
+
+### 3. Vercel Configuration
+1. Go to Vercel Dashboard → Project → Settings → Environment Variables
+2. Add `ADMIN_EMAIL_ALLOWLIST` with comma-separated authorized emails for the appropriate environments (Production/Preview/Development)
+3. Ensure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and other required vars are set
+4. Redeploy the project
+
+### 4. How Authorization Works
+- `lib/auth/actions.ts:isAdmin()` reads `process.env.ADMIN_EMAIL_ALLOWLIST`, splits by comma, trims, lowercases, and checks if the authenticated user's email is included.
+- `middleware.ts` protects `/admin/*` routes (redirects unauthenticated to `/admin/login` with safe `redirectTo`), allows `/admin/login` unauthenticated and redirects authenticated users away.
+- `app/admin/layout.tsx` enforces server-side checks: requires session + user, checks `isAdmin()`, redirects unauthorized to `/admin/login?error=Unauthorized`.
+
+
+## Troubleshooting: "Invalid API key" on Admin Login
+- Verify `.env.local` has `NEXT_PUBLIC_SUPABASE_URL=https://fgthcklnapafbtydmvbe.supabase.co` and the correct anon/publishable key for that exact project from Supabase Dashboard → Settings → API.
+- Supabase may use `eyJ...` (legacy JWT anon) or `sb_publishable_...` (publishable). Use the key that matches your project's API settings — do not guess.
+- Ensure the key is used by browser/server clients via `@supabase/ssr` (we use `NEXT_PUBLIC_SUPABASE_ANON_KEY` only). Never use `SUPABASE_SERVICE_ROLE_KEY` on the client.
+- After changing env vars locally, restart the Next.js dev server. On Vercel, redeploy after updating env vars.
+- If the error persists, confirm the key hasn't been rotated/regenerated for project `fgthcklnapafbtydmvbe`.
