@@ -88,17 +88,12 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center gap-4 shrink-0">
             {isAuthenticated ? (
-              <>
-                <Button asChild size="sm" className="h-9 px-5 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
-                  <Link href="/admin">Admin Dashboard</Link>
-                </Button>
-                <button
-                  onClick={handleSignOut}
-                  className="text-sm font-medium text-[#66645F] hover:text-[#171717] transition-colors"
-                >
-                  Sign Out
-                </button>
-              </>
+              <button
+                onClick={handleSignOut}
+                className="text-sm font-medium text-[#66645F] hover:text-[#171717] transition-colors"
+              >
+                Sign Out
+              </button>
             ) : (
               <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
                 <Link href="/register/model">Register Now</Link>
@@ -145,9 +140,6 @@ export default function Header() {
             ))}
             {isAuthenticated ? (
               <div className="space-y-3 pt-8">
-                <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
-                  <Link href="/admin">Admin Dashboard</Link>
-                </Button>
                 <button
                   onClick={handleSignOut}
                   className="w-full h-12 text-base font-medium text-[#66645F] hover:text-[#171717] transition-colors"
