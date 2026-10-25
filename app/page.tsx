@@ -21,7 +21,7 @@ export default function HomePage() {
     <main className="relative bg-[#FAFAF9]">
       <Header />
       
-      <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100svh] flex items-start justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <motion.div
             initial={{ scale: 1.1 }}
@@ -29,18 +29,18 @@ export default function HomePage() {
             transition={{ duration: 1.8, ease: "easeOut" }}
             className="absolute inset-0 bg-[url('/images/BFL_2025_12.jpeg')] bg-cover bg-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/50 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-24">
-          <div className="max-w-5xl">
+          <div className="max-w-5xl text-left">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             >
-              <span className="inline-block mb-12 px-6 py-2.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/15 text-white/90 text-sm font-light tracking-[0.3em] uppercase">
+              <span className="inline-block mb-8 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium tracking-[0.3em] uppercase">
                 Bihar Fashion League
               </span>
             </motion.div>
@@ -49,7 +49,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-              className="mb-8 text-[clamp(3.5rem,10vw,9rem)] font-bold tracking-tighter text-white leading-[0.85] font-serif"
+              className="mb-6 text-[clamp(2.75rem,8vw,5rem)] font-bold tracking-tight text-white leading-[1.05] font-serif"
             >
               THE NEXT GENERATION OF FASHION STARTS HERE
             </motion.h1>
@@ -58,7 +58,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-              className="mb-16 text-lg lg:text-xl text-white/80 max-w-2xl leading-relaxed font-light"
+              className="mb-10 text-lg lg:text-xl text-white/90 max-w-xl leading-relaxed font-light"
             >
               Discover emerging talent, runway moments, and the people shaping the future of fashion with Bihar Fashion League.
             </motion.p>
@@ -67,12 +67,12 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row gap-6"
+              className="flex flex-col sm:flex-row gap-5"
             >
-              <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-12 py-7 text-base font-medium tracking-wide transition-all duration-300">
+              <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-10 py-5 text-base font-medium tracking-wide transition-all duration-300 shadow-lg">
                 Explore BFL <ArrowRight className="ml-3 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/40 text-white hover:bg-white/10 hover:border-white/60 px-12 py-7 text-base font-medium tracking-wide backdrop-blur-sm transition-all duration-300">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary px-10 py-5 text-base font-medium tracking-wide backdrop-blur-sm transition-all duration-300">
                 Register Now
               </Button>
             </motion.div>

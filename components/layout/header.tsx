@@ -80,7 +80,11 @@ export default function Header() {
                 href={item.href}
                 className={cn(
                   "text-base font-medium tracking-tight transition-colors",
-                  pathname === item.href ? "text-primary" : "text-foreground",
+                  scrolled
+                    ? pathname === item.href
+                      ? "text-primary"
+                      : "text-foreground"
+                    : "text-white",
                 )}
               >
                 {item.name}
@@ -88,24 +92,24 @@ export default function Header() {
             ))}
             {isAuthenticated ? (
               <>
-                <Button asChild size="sm" className="px-6 py-3 text-sm font-medium tracking-tight">
+                <Button asChild size="sm" className="px-6 py-3 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90">
                   <Link href="/admin">Admin Dashboard</Link>
                 </Button>
                 <button
                   onClick={handleSignOut}
-                  className="px-6 py-3 text-sm font-medium tracking-tight text-primary hover:bg-primary/5 rounded-full transition-colors"
+                  className="px-6 py-3 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90 rounded-full transition-colors"
                 >
                   Sign Out
                 </button>
               </>
             ) : (
               <>
-                <Button asChild size="sm" className="px-6 py-3 text-sm font-medium tracking-tight">
+                <Button asChild size="sm" className="px-6 py-3 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90">
                   <Link href="/register">Register Now</Link>
                 </Button>
                 <button
                   onClick={() => router.push("/login")}
-                  className="px-6 py-3 text-sm font-medium tracking-tight text-primary hover:bg-primary/5 rounded-full transition-colors"
+                  className="px-6 py-3 text-sm font-medium tracking-tight text-white hover:bg-white/20 rounded-full transition-colors"
                 >
                   Admin Login
                 </button>
@@ -142,26 +146,33 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="text-3xl font-bold tracking-tighter block hover:text-primary"
+                className={cn(
+                  "text-3xl font-bold tracking-tighter block transition-colors",
+                  scrolled
+                    ? pathname === item.href
+                      ? "text-primary"
+                      : "text-foreground"
+                    : "text-white",
+                )}
               >
                 {item.name}
               </Link>
             ))}
             {isAuthenticated ? (
               <div className="space-y-4">
-                <Button asChild size="lg" className="w-full px-8 py-4">
+                <Button asChild size="lg" className="w-full px-8 py-4 bg-white text-primary hover:bg-white/90">
                   <Link href="/admin">Admin Dashboard</Link>
                 </Button>
                 <button
                   onClick={handleSignOut}
-                  className="w-full px-8 py-4 text-sm font-medium tracking-tight text-primary hover:bg-primary/5 rounded-full transition-colors"
+                  className="w-full px-8 py-4 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90 rounded-full transition-colors"
                 >
                   Sign Out
                 </button>
               </div>
             ) : (
               <div className="space-y-4 pt-8">
-                <Button asChild size="lg" className="w-full px-8 py-4">
+                <Button asChild size="lg" className="w-full px-8 py-4 bg-white text-primary hover:bg-white/90">
                   <Link href="/register">Register Now</Link>
                 </Button>
                 <button
@@ -169,7 +180,7 @@ export default function Header() {
                     setIsOpen(false);
                     router.push("/login");
                   }}
-                  className="w-full px-8 py-4 text-sm font-medium tracking-tight text-primary hover:bg-primary/5 rounded-full transition-colors"
+                  className="w-full px-8 py-4 text-sm font-medium tracking-tight text-white hover:bg-white/20 rounded-full transition-colors"
                 >
                   Admin Login
                 </button>
