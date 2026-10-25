@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         email: validated.email,
         gender: validated.gender,
         city: validated.city,
-        address: validated.address,
+        address: validated.residentialAddress || validated.address || null,
         height_inches: validated.heightInches,
         weight_kg: validated.weightKg || null,
         dress_size: validated.dressSize,
@@ -42,9 +42,6 @@ export async function POST(request: Request) {
         residential_address: validated.residentialAddress,
         emergency_contact_name: validated.emergencyContactName,
         emergency_contact_number: validated.emergencyContactNumber,
-        category: validated.category,
-        amount_paise: fee.amountPaise,
-        currency: "INR",
         guardian_name: validated.guardianName || null,
         guardian_relationship: validated.guardianRelation || null,
         guardian_phone: validated.guardianPhone || null,
@@ -56,6 +53,8 @@ export async function POST(request: Request) {
         consent_recorded_at: new Date().toISOString(),
         application_status: isMinor && !validated.guardianConsent ? "under_review" : "submitted",
         payment_status: "exempt",
+        amount_paise: fee.amountPaise,
+        currency: "INR",
       })
       .select()
       .single();
@@ -66,8 +65,8 @@ export async function POST(request: Request) {
       success: true,
       applicationId: data.id,
       applicationNumber: data.application_number,
-      category: data.category,
-      amount_paise: data.amount_paise,
+      category: validated.category,
+      amount_paise: fee.amountPaise,
     });
   } catch (error: any) {
     if (error.name === "ZodError") {

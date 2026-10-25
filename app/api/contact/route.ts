@@ -17,8 +17,9 @@ export async function POST(req: Request) {
     const { error } = await supabase.from("contact_inquiries").insert({
       name: validated.name,
       email: validated.email,
-      subject: validated.subject,
+      subject: validated.subject || null,
       message: validated.message,
+      status: "pending",
     });
 
     if (error) throw error;
