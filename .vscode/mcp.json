@@ -10,6 +10,10 @@
         "RAZORPAY_API_SECRET": "${env:RAZORPAY_API_SECRET}"
       },
       "description": "Razorpay MCP Server for Bihar Fashion League"
+    },
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=fgthcklnapafbtydmvbe&features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching"
     }
   }
 }
