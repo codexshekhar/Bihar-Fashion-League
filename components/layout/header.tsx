@@ -13,7 +13,6 @@ const NAV_ITEMS = [
   { name: "Events", href: "/events" },
   { name: "Gallery", href: "/gallery" },
   { name: "Partners", href: "/partners" },
-  { name: "News", href: "/news" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -102,17 +101,9 @@ export default function Header() {
                 </button>
               </>
             ) : (
-              <>
-                <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
-                  <Link href="/register/model">Register Now</Link>
-                </Button>
-                <button
-                  onClick={() => router.push("/login")}
-                  className="text-sm font-medium text-[#66645F] hover:text-[#171717] transition-colors"
-                >
-                  Admin Login
-                </button>
-              </>
+              <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
+                <Link href="/register/model">Register Now</Link>
+              </Button>
             )}
           </div>
 
@@ -170,15 +161,6 @@ export default function Header() {
                 <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
                   <Link href="/register/model">Register Now</Link>
                 </Button>
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    router.push("/login");
-                  }}
-                  className="w-full h-12 text-base font-medium text-[#66645F] hover:text-[#171717] transition-colors"
-                >
-                  Admin Login
-                </button>
               </div>
             )}
           </div>

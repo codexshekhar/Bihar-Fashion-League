@@ -10,7 +10,6 @@ const FOOTER_LINKS = [
       { name: "About", href: "/about" },
       { name: "Events", href: "/events" },
       { name: "Gallery", href: "/gallery" },
-      { name: "News", href: "/news" },
     ],
   },
   {

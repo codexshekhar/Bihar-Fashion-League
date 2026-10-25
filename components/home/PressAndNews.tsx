@@ -76,7 +76,7 @@ export function PressAndNewsSection({
               Latest announcements and media coverage.
             </p>
           </div>
-          <Link href="/news" className="text-sm font-medium text-primary hover:text-primary/80 relative group">
+          <Link href="/gallery" className="text-sm font-medium text-primary hover:text-primary/80 relative group">
             View All News <ArrowRight className="ml-3 h-5 w-5 text-primary group-hover:text-primary/80 transition-colors" />
           </Link>
         </div>
