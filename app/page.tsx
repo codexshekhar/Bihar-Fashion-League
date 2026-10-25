@@ -196,35 +196,29 @@ export default function HomePage() {
       <section className="py-16 lg:py-24">
         <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl sm:text-4xl text-[#171717] mb-3">Follow BFL</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl text-[#171717] mb-3">Gallery</h2>
             <p className="text-base text-[#66645F] max-w-2xl mx-auto">
-              Stay connected with Bihar Fashion League on Instagram for the latest runway moments, backstage stories, and announcements.
+              Relive the runway moments, celebrate the talent, and explore the stories behind Bihar Fashion League.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-              <div key={i} className="relative aspect-square overflow-hidden bg-[#E5E2DC] group">
+            {["1","2","3","4","5","6","7","8","9","10","11","12"].map((i) => (
+              <Link key={i} href="/gallery" className="relative aspect-square overflow-hidden bg-[#E5E2DC] group">
                 <Image
-                  src={`/images/BFL_2025_${i}.jpeg`}
-                  alt={`BFL Instagram gallery image ${i}`}
+                  src={`/images/Gallery/BFL_2025_${i}.jpeg`}
+                  alt={`BFL gallery image ${i}`}
                   fill
                   className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700"
                   sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 16vw"
                   loading="lazy"
                 />
-                <a
-                  href="https://www.instagram.com/biharfashionleague"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 z-10"
-                />
-              </div>
+              </Link>
             ))}
           </div>
           <div className="mt-10 text-center">
             <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
-              <Link href="https://www.instagram.com/biharfashionleague" target="_blank" rel="noopener noreferrer">
-                View on Instagram <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/gallery">
+                View Full Gallery <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
