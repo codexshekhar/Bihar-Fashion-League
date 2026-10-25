@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
@@ -9,6 +12,19 @@ const kidsFee = CATEGORY_FEES.kids;
 const otherFee = CATEGORY_FEES.other;
 
 export default function ModelRegistrationPage() {
+  useEffect(() => {
+    // Inject Razorpay payment button script
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/payment-button.js";
+    script.setAttribute("data-payment_button_id", "pl_Ts6TN7xUD8Cium");
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <main className="relative bg-white">
       <Header />
@@ -92,6 +108,23 @@ export default function ModelRegistrationPage() {
             <Button asChild size="lg" className="px-12">
               <Link href="/register/model/apply">Start Application</Link>
             </Button>
+          </div>
+
+          <div className="mt-12 border-t border-border pt-12">
+            <h3 className="font-semibold mb-4 text-center">Quick Pay</h3>
+            <p className="text-sm text-muted-foreground text-center mb-6">
+              Already have an application? Pay your registration fee directly.
+            </p>
+            <div className="flex justify-center">
+              <div
+                className="razorpay-payment-button"
+                data-payment_button_id="pl_Ts6TN7xUD8Cium"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground text-center mt-4">
+              Quick pay uses a standard ₹3,000 fee. For Kids category (₹2,500) or
+              custom amounts, please use the full application flow above.
+            </p>
           </div>
         </div>
       </section>
