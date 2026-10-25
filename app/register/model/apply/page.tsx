@@ -5,11 +5,8 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import { CATEGORY_FEES, CATEGORY_LABELS, modelRegistrationSchema, calculateAge, getFeeForCategory } from "@/lib/validation-registration";
-import { Section, SectionHeader } from "@/components/ui/section";
-import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, ArrowRight, Check, Info } from "lucide-react";
+import { CATEGORY_LABELS, calculateAge, getFeeForCategory } from "@/lib/validation-registration";
 import { useRouter } from "next/navigation";
 
 const STEPS = [
@@ -164,6 +161,7 @@ export default function ApplyPage() {
         if (!city.trim()) errs.city = "City is required";
         break;
       case 2:
+        if (!formData.category) errs.category = "Please select a category";
         if (!heightInches || heightInches < 48 || heightInches > 96) errs.heightInches = "Height must be between 48 and 96 inches";
         if (!dressSize.trim()) errs.dressSize = "Dress size is required";
         if (!shoeSize.trim()) errs.shoeSize = "Shoe size is required";
@@ -221,6 +219,7 @@ export default function ApplyPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          category: formData.category === "kids" || formData.category === "other" ? formData.category : "other",
           amount_paise: feeInfo.amountPaise,
           currency: "INR",
         }),
@@ -278,16 +277,11 @@ export default function ApplyPage() {
           </div>
 
           <div className="mt-10 flex justify-center">
-            <div className="px-6 py-3 rounded-xl border border-border bg-white flex items-center gap-4 shadow-sm">
-              <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Registration Fee
-              </span>
-              <span className="text-2xl font-bold text-primary">
-                ₹{feeInfo.amountInr.toLocaleString()}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                {formData.category === "kids" ? "Kids Category" : "All Other Categories"}
-              </span>
+            <div className="w-full max-w-md px-5 py-4 rounded-lg border border-[#171717]/20 bg-[#F8F7F2] flex flex-col sm:flex-row items-center justify-center gap-3 text-center shadow-sm">
+              <Info className="h-4 w-4 text-[#171717]" />
+              <div className="text-xs tracking-[0.2em] uppercase text-[#171717] font-medium">
+                {formData.category === "kids" ? "REGISTRATION FEE ₹2,500 — KIDS CATEGORY" : formData.category === "other" ? "REGISTRATION FEE ₹3,000 — ALL OTHER CATEGORIES" : "Select a category to view your registration fee"}
+              </div>
             </div>
           </div>
         </div>
@@ -417,8 +411,33 @@ export default function ApplyPage() {
 
             {step === 2 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold tracking-tight">Modelling Details</h2>
-                <p className="text-muted-foreground">Share your physical stats and experience.</p>
+                <div>
+                  <h2 className="text-2xl font-serif tracking-tight text-[#171717]">Modelling Details</h2>
+                  <p className="text-[#66645F] mt-1">Share your physical stats, experience and category.</p>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-lg font-medium text-[#171717]">Registration Category</h3>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      onClick={() => updateField("category", "kids")}
+                      className={`p-4 rounded-lg border text-left transition-colors ${formData.category === "kids" ? "border-[#171717] bg-[#F8F7F2]" : "border-[#E5E2DC] hover:border-[#171717]/40"}`}
+                    >
+                      <p className="font-medium text-[#171717]">Kids</p>
+                      <p className="text-sm text-[#66645F] mt-1">₹2,500</p>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => updateField("category", "other")}
+                      className={`p-4 rounded-lg border text-left transition-colors ${formData.category === "other" ? "border-[#171717] bg-[#F8F7F2]" : "border-[#E5E2DC] hover:border-[#171717]/40"}`}
+                    >
+                      <p className="font-medium text-[#171717]">All Other Categories</p>
+                      <p className="text-sm text-[#66645F] mt-1">₹3,000</p>
+                    </button>
+                  </div>
+                  {errors.category && <p className="text-xs text-destructive">{errors.category}</p>}
+                </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-3">

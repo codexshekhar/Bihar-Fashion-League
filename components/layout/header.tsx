@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X, LogOut, Shield, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -17,39 +17,14 @@ const NAV_ITEMS = [
 
 export default function Header() {
   const pathname = usePathname();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    let mounted = true;
-    async function checkAuth() {
-      try {
-        const res = await fetch("/api/auth/session");
-        if (mounted && res.ok) {
-          const data = await res.json();
-          setIsAuthenticated(!!data.session || !!data.supabaseNotConfigured);
-        }
-      } catch {}
-    }
-    checkAuth();
-    return () => { mounted = false; };
-  }, []);
-
-  const handleSignOut = async () => {
-    try {
-      await fetch("/api/auth/signout", { method: "POST" });
-    } catch {}
-    setIsAuthenticated(false);
-    router.push("/");
-  };
 
   return (
     <header
@@ -87,18 +62,9 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4 shrink-0">
-            {isAuthenticated ? (
-              <button
-                onClick={handleSignOut}
-                className="text-sm font-medium text-[#66645F] hover:text-[#171717] transition-colors"
-              >
-                Sign Out
-              </button>
-            ) : (
-              <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
-                <Link href="/register/model">Register Now</Link>
-              </Button>
-            )}
+            <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
+              <Link href="/register/model">Register Now</Link>
+            </Button>
           </div>
 
           <div className="flex items-center gap-3 lg:hidden">
@@ -138,22 +104,11 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            {isAuthenticated ? (
-              <div className="space-y-3 pt-8">
-                <button
-                  onClick={handleSignOut}
-                  className="w-full h-12 text-base font-medium text-[#66645F] hover:text-[#171717] transition-colors"
-                >
-                  Sign Out
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-3 pt-8">
-                <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
-                  <Link href="/register/model">Register Now</Link>
-                </Button>
-              </div>
-            )}
+            <div className="space-y-3 pt-8">
+              <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
+                <Link href="/register/model">Register Now</Link>
+              </Button>
+            </div>
           </div>
         </div>
       )}
