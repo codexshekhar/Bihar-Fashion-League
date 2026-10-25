@@ -26,6 +26,29 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      window.addEventListener("keydown", handleEscape);
+    }
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isOpen]);
+
   return (
     <header
       className={cn(
@@ -63,7 +86,7 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center gap-4 shrink-0">
             <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
-              <Link href="/register/model">Register Now</Link>
+              <Link href="/register/model/apply">Register Now</Link>
             </Button>
           </div>
 
@@ -80,8 +103,8 @@ export default function Header() {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-[#F8F7F0]">
-          <div className="absolute top-5 right-4 sm:right-6">
+        <div className="fixed inset-0 z-[60] bg-[#F8F7F0]">
+          <div className="absolute top-4 right-4 sm:right-6">
             <button
               onClick={() => setIsOpen(false)}
               className="p-2 text-[#171717] hover:text-[#171717]/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717]/20 rounded-md"
@@ -90,7 +113,7 @@ export default function Header() {
               <X className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-20 px-6 space-y-6">
+          <nav className="mt-20 px-6 space-y-5 h-[calc(100vh-6rem)] overflow-y-auto">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
@@ -104,12 +127,12 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <div className="space-y-3 pt-8">
+            <div className="pt-6">
               <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
-                <Link href="/register/model">Register Now</Link>
+                <Link href="/register/model/apply" onClick={() => setIsOpen(false)}>Register Now</Link>
               </Button>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </header>
