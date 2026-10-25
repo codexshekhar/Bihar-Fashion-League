@@ -83,164 +83,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 lg:py-16">
+      <section className="py-10 lg:py-14">
         <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <p className="text-sm tracking-[0.28em] uppercase text-[#66645F] mb-3">Our Partners</p>
             <h2 className="font-serif text-2xl sm:text-3xl text-[#171717]">Sponsors &amp; Partners</h2>
             <p className="mt-3 text-base text-[#66645F]">Brands that share our vision for fashion in Bihar.</p>
           </div>
           <PartnersSection
             sponsors={[
-              {
-                id: "idt",
-                name: "IDT",
-                logoUrl: "/images/Sponsers/IDT%20Logo%20White.png",
-                logoAlt: "IDT",
-                tier: "title",
-              },
-              {
-                id: "sla",
-                name: "SLA",
-                logoUrl: "/images/Sponsers/SLA%20LOGO%20WITH%20TM.png",
-                logoAlt: "SLA",
-                tier: "event",
-              },
-              {
-                id: "s1",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.46.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s2",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.46%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s3",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.47.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s4",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.47%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s5",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.48.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s6",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.49.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s7",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.49%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s8",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.50.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s9",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.50%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s10",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.51.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s11",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.51%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s12",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.52.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s13",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.52%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s14",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.53.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s15",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.53%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s16",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.54.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s17",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.54%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s18",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.55.jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
-              {
-                id: "s19",
-                name: "Sponsor",
-                logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.55%20(1).jpeg",
-                logoAlt: "Sponsor",
-                tier: "collaborator",
-              },
+              { id: "idt", name: "IDT", logoUrl: "/images/Sponsers/IDT%20Logo%20White.png", logoAlt: "IDT", tier: "title" },
+              { id: "sla", name: "SLA", logoUrl: "/images/Sponsers/SLA%20LOGO%20WITH%20TM.png", logoAlt: "SLA", tier: "event" },
             ]}
           />
+          <div className="mt-8 text-center">
+            <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
+              <Link href="/partners">
+                Partner With BFL <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -276,24 +138,34 @@ export default function HomePage() {
 
       <FeaturedParticipantsSection participants={[]} />
 
+      <section className="py-12 lg:py-16">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs tracking-[0.32em] uppercase text-[#66645F] mb-4">TALENT</p>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#171717] mb-4">Talent Shaping Bihar&apos;s Fashion Community</h2>
+          <p className="text-base text-[#66645F] max-w-2xl mx-auto">
+            Discover the creativity, individuality, and ambition shaping Bihar&apos;s fashion community.
+          </p>
+        </div>
+      </section>
+
       <section className="py-16 lg:py-24">
         <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden">
             <div className="absolute inset-0">
               <Image
                 src="/images/BFL_2025_11.jpeg"
-                alt="BFL runway"
+                alt="Bihar Fashion League runway"
                 fill
                 className="object-cover object-[center_30%]"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/60" />
+              <div className="absolute inset-0 bg-black/55" />
             </div>
-            <div className="relative z-10 text-center py-16 sm:py-20 lg:py-28 px-4">
+            <div className="relative z-10 text-center py-16 sm:py-20 lg:py-24 px-4">
               <p className="text-sm tracking-[0.28em] uppercase text-white/80 mb-4">Join Us</p>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white mb-4">Your Runway Journey Starts Here</h2>
-              <p className="text-base sm:text-lg text-white/85 max-w-[620px] mx-auto mb-8">
-                Eligible participants can register for Bihar Fashion League and take their first step onto the runway.
+              <p className="text-base sm:text-lg text-white/90 max-w-[620px] mx-auto mb-8">
+                Explore the registration process and take your first step toward the runway.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Button asChild className="h-11 px-7 bg-white text-[#171717] hover:bg-white/90 text-sm tracking-wide">
@@ -353,9 +225,8 @@ export default function HomePage() {
       <AboutSection />
       <FashionCategoriesSection />
       <UpcomingEventSection />
+      <FashionCategoriesSection />
       <GallerySection />
-      <PressAndNewsSection />
-      <CollabCtaSection />
       <FaqSection />
 
       <Footer />
