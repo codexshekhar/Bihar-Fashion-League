@@ -5,31 +5,55 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import { PHOTO_MAPPING_MANIFEST } from "@/lib/photo-mapping";
 
-interface GalleryItem {
-  id: string;
-  src: string;
-  alt: string;
-  category: string;
-  edition: string;
-  width: number;
-  height: number;
-  approved: boolean;
-}
+const GALLERY_FILES = [
+  "BFL_2025_1.jpeg",
+  "BFL_2025_2.jpeg",
+  "BFL_2025_3.jpeg",
+  "BFL_2025_4.jpeg",
+  "BFL_2025_5.jpeg",
+  "BFL_2025_6.jpeg",
+  "BFL_2025_7.jpeg",
+  "BFL_2025_8.jpeg",
+  "BFL_2025_9.jpeg",
+  "BFL_2025_10.jpeg",
+  "BFL_2025_11.jpeg",
+  "BFL_2025_12.jpeg",
+  "BFL_2025_13.jpeg",
+  "BFL_2025_14.jpeg",
+  "BFL_2025_15.jpeg",
+  "BFL_2025_16.jpeg",
+  "BFL_2025_17.jpeg",
+  "BFL_2025_18.jpeg",
+  "BFL_2025_19.jpeg",
+  "BFL_2025_20.jpeg",
+  "BFL_2025_21.jpeg",
+  "BFL_2025_22.jpeg",
+  "BFL_2025_23.jpeg",
+  "BFL_2025_24.jpeg",
+  "BFL_2025_25.jpeg",
+  "BFL_2025_26.jpeg",
+  "BFL_2025_27.jpeg",
+  "BFL_2025_28.jpeg",
+  "BFL_2025_29.jpeg",
+  "BFL_2025_30.jpeg",
+  "BFL_2025_31.jpeg",
+  "BFL_2025_32.jpeg",
+  "BFL_2025_33.jpeg",
+  "BFL_2025_34.jpeg",
+  "BFL_2025_35.jpeg",
+  "BFL_2025_36.jpeg",
+  "BFL_2025_37.jpeg",
+  "BFL_2025_38.jpeg",
+  "BFL_2025_39.jpeg",
+  "BFL_2025_40.jpeg",
+];
 
-const GALLERY_ITEMS: GalleryItem[] = PHOTO_MAPPING_MANIFEST.filter((p) => p.publicationApproved).map((p) => ({
-  id: p.imageId,
-  src: p.filePath,
-  alt: p.altText,
-  category: p.aspectRatio === "2:3" ? "Portraits" : p.aspectRatio === "16:9" || p.aspectRatio === "4:3" ? "Event Highlights" : "Runway",
-  edition: "BFL 2025",
-  width: p.width,
-  height: p.height,
-  approved: true,
+const GALLERY_ITEMS = GALLERY_FILES.map((file, index) => ({
+  id: `gallery-${index + 1}`,
+  src: `/images/Gallery/${file}`,
+  alt: `Bihar Fashion League gallery image ${index + 1}`,
 }));
-
-const CATEGORIES = ["All", "Runway", "Portraits", "Backstage", "Event Highlights"];
 
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -66,7 +90,6 @@ function useReveal() {
 export default function GalleryPage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const gridRef = useReveal();
-  const [activeCategory, setActiveCategory] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -88,18 +111,15 @@ export default function GalleryPage() {
     };
   }, [lightboxIndex]);
 
-  const filteredItems = activeCategory === "All" ? GALLERY_ITEMS : GALLERY_ITEMS.filter((item) => item.category === activeCategory);
-  const approvedCount = GALLERY_ITEMS.length;
-
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
   const goNext = () => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex + 1) % filteredItems.length);
+    setLightboxIndex((lightboxIndex + 1) % GALLERY_ITEMS.length);
   };
   const goPrev = () => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex - 1 + filteredItems.length) % filteredItems.length);
+    setLightboxIndex((lightboxIndex - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length);
   };
 
   useEffect(() => {
@@ -175,13 +195,13 @@ export default function GalleryPage() {
             </div>
             <div className="relative z-10 px-6 sm:px-10 lg:px-16 max-w-3xl">
               <p className="hero-fade text-xs tracking-[0.32em] uppercase text-white/80 mb-5">
-                BIHAR FASHION LEAGUE · THE ARCHIVE
+                THE ARCHIVE
               </p>
               <h1 className="hero-fade hero-fade-delay-1 font-serif text-[clamp(2.8rem,7vw,5.2rem)] leading-[0.95] text-white mb-6">
-                Moments That Define the Runway
+                The BFL Gallery
               </h1>
               <p className="hero-fade hero-fade-delay-2 text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
-                Explore the people, performances, and behind-the-scenes moments that bring Bihar Fashion League to life.
+                Relive the runway moments, celebrate the talent, and explore the stories behind Bihar Fashion League.
               </p>
             </div>
           </div>
@@ -189,66 +209,28 @@ export default function GalleryPage() {
       </section>
 
       <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 lg:mb-12">
-            <p className="text-xs tracking-[0.32em] uppercase text-[#66645F] mb-4">THE VISUAL ARCHIVE</p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#171717] mb-4">Visual Gallery</h2>
-            <p className="text-base text-[#66645F] max-w-2xl">
-              A curated collection of moments from Bihar Fashion League events.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-10 lg:mb-12">
-            {CATEGORIES.map((category) => (
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+          <div ref={gridRef} className="reveal columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
+            {GALLERY_ITEMS.map((item, index) => (
               <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 text-sm transition-colors border ${
-                  activeCategory === category
-                    ? "bg-[#171717] text-white border-[#171717]"
-                    : "bg-transparent text-[#66645F] border-[#E5E2DC] hover:text-[#171717] hover:border-[#171717]/40"
-                }`}
+                key={item.id}
+                onClick={() => openLightbox(index)}
+                className="tile-reveal mb-4 w-full break-inside-avoid overflow-hidden focus:outline-none focus:ring-1 focus:ring-[#171717]"
+                style={{ transitionDelay: `${Math.min(index % 12, 11) * 40}ms` }}
+                aria-label={item.alt}
               >
-                {category}
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  width={800}
+                  height={1000}
+                  className="w-full h-auto object-contain hover:scale-[1.01] transition-transform duration-700"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                  loading="lazy"
+                />
               </button>
             ))}
           </div>
-
-          {filteredItems.length === 0 ? (
-            <div className="text-center py-16 border-t border-[#E5E2DC]">
-              <h3 className="font-serif text-2xl text-[#171717] mb-2">New Moments Coming Soon</h3>
-              <p className="text-base text-[#66645F]">We&apos;re preparing more moments from Bihar Fashion League for the gallery.</p>
-            </div>
-          ) : (
-            <>
-              <div ref={gridRef} className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
-                {filteredItems.map((item, index) => (
-                  <button
-                    key={item.id}
-                    onClick={() => openLightbox(index)}
-                    className="tile-reveal relative aspect-[3/4] overflow-hidden group focus:outline-none focus:ring-1 focus:ring-[#171717]"
-                    style={{ transitionDelay: `${Math.min(index % 8, 7) * 60}ms` }}
-                    aria-label={item.alt}
-                  >
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                      className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                      loading="lazy"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <span className="text-xs text-white/90 uppercase tracking-wider">{item.category}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-              <div className="mt-10 text-center">
-                <p className="text-sm text-[#66645F]">{approvedCount} approved moments from BFL 2025</p>
-              </div>
-            </>
-          )}
         </div>
       </section>
 
@@ -275,13 +257,13 @@ export default function GalleryPage() {
           >
             <ChevronRight className="h-7 w-7" />
           </button>
-          <div className="relative max-w-[90vw] max-h-[90vh] w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-w-[95vw] max-h-[95vh] w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <Image
-              src={filteredItems[lightboxIndex].src}
-              alt={filteredItems[lightboxIndex].alt}
-              fill
-              sizes="90vw"
-              className="object-contain"
+              src={GALLERY_ITEMS[lightboxIndex].src}
+              alt={GALLERY_ITEMS[lightboxIndex].alt}
+              width={1600}
+              height={2000}
+              className="max-w-full max-h-full object-contain"
               priority
             />
           </div>
