@@ -6,10 +6,6 @@
   "framework": "nextjs",
   "regions": ["bom1"],
   "env": {
-    "NEXT_PUBLIC_SITE_URL": "https://biharfashionleague.com",
-    "NEXT_PUBLIC_SUPABASE_URL": "@biharfashionleague_supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@biharfashionleague_supabase_anon_key",
-    "SUPABASE_SERVICE_ROLE_KEY": "@biharfashionleague_supabase_service_role_key",
-    "SESSION_SECRET": "@biharfashionleague_session_secret"
+    "NEXT_PUBLIC_SITE_URL": "https://biharfashionleague.com"
   }
 }
