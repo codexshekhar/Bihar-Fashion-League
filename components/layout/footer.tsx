@@ -43,8 +43,12 @@ export default function Footer() {
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 py-14 lg:py-16">
           <div className="lg:col-span-1">
-            <Link href="/" className="text-2xl font-bold tracking-tight block mb-6">
-              BFL
+            <Link href="/" className="inline-flex items-center mb-6" aria-label="Bihar Fashion League home">
+              <img
+                src="/images/BFl-logo/bfl-logo-white.png"
+                alt="Bihar Fashion League official logo"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm leading-relaxed text-[#B5B5B5] max-w-sm mb-6">
               Bihar Fashion League showcases emerging fashion talent and runway participants across Bihar and beyond, creating opportunities in fashion, design, and creative careers.

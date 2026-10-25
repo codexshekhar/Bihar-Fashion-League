@@ -62,9 +62,14 @@ export default function Header() {
         <div className="flex h-16 sm:h-[72px] items-center justify-between gap-8">
           <Link
             href="/"
-            className="flex items-center text-xl sm:text-2xl font-bold tracking-tight text-[#171717] shrink-0"
+            className="flex items-center shrink-0"
+            aria-label="Bihar Fashion League home"
           >
-            BFL
+            <img
+              src="/images/BFl-logo/bfl-black-logo.png"
+              alt="Bihar Fashion League official logo"
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9 flex-1 justify-center">
@@ -109,9 +114,14 @@ export default function Header() {
               <Link
                 href="/"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center text-xl sm:text-2xl font-bold tracking-tight text-[#171717]"
+                className="flex items-center"
+                aria-label="Bihar Fashion League home"
               >
-                BFL
+                <img
+                  src="/images/BFl-logo/bfl-black-logo.png"
+                  alt="Bihar Fashion League official logo"
+                  className="h-9 sm:h-10 w-auto object-contain"
+                />
               </Link>
               <button
                 onClick={() => setIsOpen(false)}
