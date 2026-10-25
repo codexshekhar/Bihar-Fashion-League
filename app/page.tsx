@@ -86,7 +86,7 @@ export default function HomePage() {
       <section className="py-12 lg:py-16 bg-white">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717] mb-3">Our Partners</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717] mb-3">Our Brand Partners</h2>
             <p className="text-base text-[#66645F]">Brands that share our vision for fashion in Bihar.</p>
           </div>
           <PartnersSection
