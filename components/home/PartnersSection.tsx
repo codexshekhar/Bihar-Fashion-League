@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { useEffect, useRef } from "react";
 
 interface SponsorCardProps {
   id: string;
@@ -11,52 +11,36 @@ interface SponsorCardProps {
   website?: string;
 }
 
-const tierConfig: Record<string, { label: string }> = {
-  title: { label: "Headline Sponsor" },
-  event: { label: "Official Event Partner" },
-  media: { label: "Media Partner" },
-  collaborator: { label: "Associate Partner" },
-};
+function useReveal() {
+  const ref = useRef<HTMLDivElement>(null);
 
-export function SponsorCard({
-  id,
-  name,
-  logoUrl,
-  logoAlt,
-  tier,
-  website,
-}: SponsorCardProps) {
-  const config = tierConfig[tier] || { label: tier };
-  const content = (
-    <div className="flex items-center justify-between py-6 border-b border-[#E5E2DC] group">
-      <div className="flex items-center gap-6">
-        {logoUrl ? (
-          <img
-            src={logoUrl}
-            alt={logoAlt || name}
-            className="h-12 w-auto max-w-[160px] object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-            loading="lazy"
-          />
-        ) : null}
-        <div>
-          <span className="text-[10px] tracking-[0.28em] uppercase text-[#66645F] block mb-1">
-            {config.label}
-          </span>
-          <p className="text-base font-medium text-[#171717]">{name}</p>
-        </div>
-      </div>
-      {website ? <ArrowRight className="h-4 w-4 text-[#66645F] group-hover:text-[#171717] transition-colors" /> : null}
-    </div>
-  );
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
 
-  if (website) {
-    return (
-      <Link href={website} target="_blank" rel="noopener noreferrer">
-        {content}
-      </Link>
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      element.classList.add("reveal-visible");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            element.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
     );
-  }
-  return <div>{content}</div>;
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return ref;
 }
 
 export function PartnersSection({
@@ -64,26 +48,63 @@ export function PartnersSection({
 }: {
   sponsors?: Array<SponsorCardProps>;
 }) {
+  const gridRef = useReveal();
+
   return (
-    <section className="relative">
-      <div className="space-y-0">
+    <section>
+      <style jsx global>{`
+        .reveal {
+          opacity: 0;
+          transform: translateY(16px);
+          transition: opacity 650ms ease, transform 650ms ease;
+        }
+        .reveal-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .tile-reveal {
+          opacity: 0;
+          transform: translateY(12px);
+          transition: opacity 600ms ease, transform 600ms ease;
+        }
+        .reveal-visible .tile-reveal {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .reveal,
+          .tile-reveal {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+      `}</style>
+      <div ref={gridRef} className="reveal">
         {sponsors.length > 0 ? (
-          sponsors.map((s) => <SponsorCard key={s.id} {...s} />)
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1">
+            {sponsors.map((s, index) => (
+              <div
+                key={s.id}
+                className="tile-reveal aspect-square flex items-center justify-center p-4 bg-[#f0f2ff] border border-white transition-all duration-300 hover:bg-[#e8ebff] focus-within:ring-1 focus-within:ring-[#171717]"
+                style={{ transitionDelay: `${Math.min(index, 11) * 40}ms` }}
+              >
+                <img
+                  src={s.logoUrl}
+                  alt={s.logoAlt || s.name}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         ) : (
-          <div className="py-10 text-center border-b border-[#E5E2DC]">
+          <div className="text-center py-10">
             <p className="text-base text-[#66645F]">
-              Sponsor and partner information will be announced soon.
+              Partner information will be announced soon.
             </p>
           </div>
         )}
-      </div>
-
-      <div className="mt-10 text-center">
-        <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
-          <Link href="/partners">
-            Partner With BFL <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
       </div>
     </section>
   );

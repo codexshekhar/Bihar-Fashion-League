@@ -83,12 +83,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-10 lg:py-14">
-        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <p className="text-sm tracking-[0.28em] uppercase text-[#66645F] mb-3">Our Partners</p>
-            <h2 className="font-serif text-2xl sm:text-3xl text-[#171717]">Sponsors &amp; Partners</h2>
-            <p className="mt-3 text-base text-[#66645F]">Brands that share our vision for fashion in Bihar.</p>
+      <section className="py-12 lg:py-16 bg-white">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717] mb-3">Our Partners</h2>
+            <p className="text-base text-[#66645F]">Brands that share our vision for fashion in Bihar.</p>
           </div>
           <PartnersSection
             sponsors={[
@@ -96,13 +95,6 @@ export default function HomePage() {
               { id: "sla", name: "SLA", logoUrl: "/images/Sponsers/SLA%20LOGO%20WITH%20TM.png", logoAlt: "SLA", tier: "event" },
             ]}
           />
-          <div className="mt-8 text-center">
-            <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
-              <Link href="/partners">
-                Partner With BFL <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
         </div>
       </section>
 
