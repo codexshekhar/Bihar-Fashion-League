@@ -1,127 +1,44 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Section, SectionHeader } from "@/components/ui/section";
-import { CATEGORY_FEES, CATEGORY_LABELS } from "@/lib/validation-registration";
-
-const kidsFee = CATEGORY_FEES.kids;
-const otherFee = CATEGORY_FEES.other;
 
 export default function ModelRegistrationPage() {
-  useEffect(() => {
-    const container = document.querySelector(".razorpay-payment-button-container");
-    if (container && !container.querySelector("form")) {
-      const form = document.createElement("form");
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/payment-button.js";
-      script.setAttribute("data-payment_button_id", "pl_Ts6TN7xUD8Cium");
-      script.async = true;
-      form.appendChild(script);
-      container.appendChild(form);
-    }
-  }, []);
-
   return (
-    <main className="relative bg-white">
+    <main className="relative bg-[#F8F7F0]">
       <Header />
 
-      <section className="relative overflow-hidden bg-white">
-        <div className="absolute inset-0 bg-[url('/images/BFL_2025_16.jpeg')] bg-cover bg-center opacity-80" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent/40" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 lg:py-40 text-center">
-          <h1 className="text-5xl font-bold tracking-tight text-white leading-tight">BIHAR FASHION LEAGUE 2026</h1>
-          <p className="mt-6 text-2xl text-white/90 max-w-2xl mx-auto">Official Model Registration</p>
-          <p className="mt-4 text-lg text-white/80 max-w-3xl mx-auto">
-            Apply to participate in Bihar Fashion League 2026. Complete the application carefully and submit the
-            registration fee to complete your application. Photographs and supporting documents can be submitted later
-            through the secure follow-up process.
-          </p>
+      <section className="relative pt-32 sm:pt-36 pb-16 lg:pb-24">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-xs tracking-[0.32em] uppercase text-[#66645F] mb-5">BIHAR FASHION LEAGUE</p>
+            <h1 className="font-serif text-[clamp(2.8rem,6vw,4.8rem)] leading-[0.95] text-[#171717] mb-6">
+              Model Registration
+            </h1>
+            <p className="text-base sm:text-lg leading-relaxed text-[#66645F] max-w-2xl">
+              Apply to participate in Bihar Fashion League. Complete the application form to submit your registration.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="mx-auto max-w-4xl px-4">
-          <div className="bg-white p-8 rounded-2xl border border-border mb-8">
-            <h2 className="text-2xl font-bold mb-4">Registration Details</h2>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="p-6 rounded-xl border border-border bg-gray-50">
-                <h3 className="font-semibold mb-2 flex items-center gap-2">
-                  <span className="text-primary">👶</span>
-                  {CATEGORY_LABELS.kids}
-                </h3>
-                <p className="text-2xl font-bold text-primary mb-2">₹{kidsFee.amountInr.toLocaleString()}</p>
-                <p className="text-sm text-muted-foreground">
-                  For applicants under 18 years. Guardian consent required.
-                </p>
-              </div>
-              <div className="p-6 rounded-xl border border-border bg-white">
-                <h3 className="font-semibold mb-2 flex items-center gap-2">
-                  <span className="text-primary">👤</span>
-                  {CATEGORY_LABELS.other}
-                </h3>
-                <p className="text-2xl font-bold text-primary mb-2">₹{otherFee.amountInr.toLocaleString()}</p>
-                <p className="text-sm text-muted-foreground">
-                  For all other age categories.
-                </p>
-              </div>
+      <section className="pb-20 lg:pb-28">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-[#E5E2DC] pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <h2 className="font-serif text-2xl sm:text-3xl text-[#171717] mb-2">Start Your Application</h2>
+              <p className="text-base text-[#66645F]">
+                Fill in your details, upload documents as prompted, and submit your application.
+              </p>
             </div>
-
-            <div className="mt-8">
-              <h3 className="font-semibold mb-2">Application Steps</h3>
-              <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
-                <li>1. Personal Details</li>
-                <li>2. Modelling Details</li>
-                <li>3. Interests & Portfolio</li>
-                <li>4. Address & Emergency Contact</li>
-                <li>5. Review & Consent</li>
-                <li>6. Payment</li>
-              </ol>
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Contact Information</h3>
-            <p className="text-sm text-muted-foreground">
-              Phone: 6207330072, 8709363167, 8210501502<br />
-              Email: piyush@biharfashionleague.com<br />
-              Instagram: @Biharfashionleague
-            </p>
-          </div>
-
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Important Notes</h3>
-            <ul className="text-sm text-muted-foreground space-y-1">
-              <li>• Photographs and documents can be submitted later</li>
-              <li>• If under 18, guardian consent is required</li>
-              <li>• Payment is required to complete registration</li>
-              <li>• Applications are subject to review</li>
-              <li>• Registration fee is non-refundable once paid</li>
-            </ul>
-          </div>
-
-          <div className="text-center">
-            <Button asChild size="lg" className="px-12">
-              <Link href="/register/model/apply">Start Application</Link>
+            <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
+              <Link href="/register/model/apply">
+                Start Application <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
-          </div>
-
-          <div className="mt-12 border-t border-border pt-12">
-            <h3 className="font-semibold mb-4 text-center">Quick Pay</h3>
-            <p className="text-sm text-muted-foreground text-center mb-6">
-              Already have an application? Pay your registration fee directly.
-            </p>
-            <div className="flex justify-center">
-              <div className="razorpay-payment-button-container" />
-            </div>
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              Quick pay uses a standard ₹3,000 fee. For Kids category (₹2,500) or
-              custom amounts, please use the full application flow above.
-            </p>
           </div>
         </div>
       </section>

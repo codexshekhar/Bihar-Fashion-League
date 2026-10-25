@@ -250,11 +250,11 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="mt-8">
-                <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
-                  <Link href="/participants">
-                    Explore Participants <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+              <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
+                <Link href="/gallery">
+                  Explore Gallery <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
               </div>
             </div>
             <div className="lg:col-span-7">

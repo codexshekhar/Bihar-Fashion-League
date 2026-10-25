@@ -152,8 +152,8 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button asChild variant="ghost" className="h-11 px-7 text-white hover:bg-white/10 text-sm tracking-wide">
-                  <Link href="/events">
-                    Explore the Event <ArrowRight className="ml-2 h-4 w-4" />
+                  <Link href="/gallery">
+                    Explore Gallery <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>

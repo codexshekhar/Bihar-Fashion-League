@@ -1,219 +1,115 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Clock, ArrowRight } from "lucide-react";
-import { Section } from "@/components/ui/section";
-import { useState, useEffect } from "react";
+import { CheckCircle } from "lucide-react";
 
-interface ConfirmationData {
+interface ApplicationData {
   applicationNumber: string;
-  name: string;
+  fullName: string;
   email: string;
   category: string;
-  amount_paise: number;
-  amountInr: string;
-  currency: string;
-  paymentStatus: string;
-  paymentId: string | null;
-  orderId: string | null;
-  paidAt: string | null;
-  createdAt: string | null;
-  guardianConsentStatus: string | null;
 }
 
-export default function ConfirmationPage({ params }: { params: { token: string } }) {
-  const [data, setData] = useState<ConfirmationData | null>(null);
-  const [status, setStatus] = useState<"loading" | "success" | "pending" | "error">("loading");
-  const [error, setError] = useState<string | null>(null);
+export default function ConfirmationPage() {
+  const params = useParams();
+  const token = params.token as string;
+  const [data, setData] = useState<ApplicationData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchApplication() {
       try {
-        const res = await fetch(`/api/application/${params.token}`, {
-          headers: { Accept: "application/json" },
-        });
-
-        if (!res.ok) {
-          setStatus("error");
-          setError("Application not found");
-          return;
-        }
-
-        const appData = await res.json();
-        setData(appData);
-
-        if (appData.paymentStatus === "paid") {
-          setStatus("success");
-        } else {
-          setStatus("pending");
-        }
-      } catch {
-        setStatus("error");
-        setError("Failed to load application");
+        const res = await fetch(`/api/register/confirmation?token=${token}`);
+        if (!res.ok) throw new Error("Failed to fetch");
+        const result = await res.json();
+        setData(result);
+      } catch (err) {
+        setError("Application not found");
+      } finally {
+        setLoading(false);
       }
     }
+    if (token) fetchApplication();
+  }, [token]);
 
-    fetchApplication();
-  }, [params.token]);
+  if (loading) {
+    return (
+      <main className="relative bg-[#F8F7F0]">
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-[#66645F]">Loading...</p>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <main className="relative bg-[#F8F7F0]">
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center max-w-md px-4">
+            <h1 className="font-serif text-3xl text-[#171717] mb-4">Application Not Found</h1>
+            <p className="text-[#66645F] mb-8">The confirmation link is invalid or has expired.</p>
+            <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90">
+              <Link href="/register/model">Apply Again</Link>
+            </Button>
+          </div>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
 
   return (
-    <main className="relative bg-[#FAFAF9] min-h-screen">
+    <main className="relative bg-[#F8F7F0]">
       <Header />
-
-      <section className="py-24">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          {status === "loading" && (
-            <div className="text-center py-20">
-              <div className="flex justify-center">
-                <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      <section className="pt-32 sm:pt-36 pb-20 lg:pb-28">
+        <div className="mx-auto max-w-[800px] px-4 sm:px-6 lg:px-8 text-center">
+          <CheckCircle className="h-16 w-16 text-[#171717] mx-auto mb-6" />
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#171717] mb-4">
+            Registration Submitted Successfully
+          </h1>
+          <p className="text-base sm:text-lg text-[#66645F] mb-8 max-w-2xl mx-auto">
+            Thank you for applying to Bihar Fashion League. Your registration has been received. Our team will review your application and contact you using the details you provided.
+          </p>
+          <div className="border border-[#E5E2DC] p-6 sm:p-8 mb-10 text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <p className="text-xs tracking-[0.28em] uppercase text-[#66645F] mb-2">Application Number</p>
+                <p className="text-base text-[#171717]">{data.applicationNumber}</p>
               </div>
-              <p className="mt-4 text-muted-foreground">Loading your application...</p>
-            </div>
-          )}
-
-          {status === "error" && (
-            <div className="text-center py-20">
-              <div className="flex justify-center">
-                <Clock className="h-16 w-16 text-destructive mx-auto mb-6" />
+              <div>
+                <p className="text-xs tracking-[0.28em] uppercase text-[#66645F] mb-2">Full Name</p>
+                <p className="text-base text-[#171717]">{data.fullName}</p>
               </div>
-              <h2 className="text-2xl font-bold mb-4">Application Not Found</h2>
-              <p className="text-muted-foreground">{error}</p>
-              <Button asChild>
-                <Link href="/register/model">Start New Application</Link>
-              </Button>
-            </div>
-          )}
-
-          {status === "success" && data && (
-            <div className="text-center">
-              <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-6" />
-              <h1 className="text-4xl font-bold tracking-tight mb-4">Registration Confirmed</h1>
-              <p className="text-lg text-muted-foreground mb-10">
-                Thank you for registering for Bihar Fashion League 2026
-              </p>
-
-              <div className="bg-white p-8 rounded-2xl border border-border mb-10 shadow-sm">
-                <h3 className="font-bold mb-6 text-foreground">Application Summary</h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Applicant Name</p>
-                      <p className="font-medium text-foreground">{data.name}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-muted-foreground">Category</p>
-                      <p className="font-medium text-primary">
-                        {data.category === "kids" ? "👶 Kids Category" : "👤 All Other Categories"}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Application Reference</p>
-                      <p className="font-mono font-medium text-foreground">{data.applicationNumber}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-muted-foreground">Amount Paid</p>
-                      <p className="font-mono font-bold text-primary">
-                        ₹{data.amountInr}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Payment Reference</p>
-                      <p className="font-mono font-medium text-foreground">
-                        {data.paymentId || "—"}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-muted-foreground">Payment Status</p>
-                      <p className="font-medium">
-                        <Badge variant="default" className="text-xs">
-                          {data.paymentStatus.charAt(0).toUpperCase() + data.paymentStatus.slice(1)}
-                        </Badge>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-start pt-4 border-t border-border">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Submitted On</p>
-                      <p className="font-medium text-foreground">
-                        {new Date(data.createdAt!).toLocaleDateString("en-IN")}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-muted-foreground">Currency</p>
-                      <p className="font-medium text-foreground">{data.currency}</p>
-                    </div>
-                  </div>
-                </div>
+              <div>
+                <p className="text-xs tracking-[0.28em] uppercase text-[#66645F] mb-2">Email</p>
+                <p className="text-base text-[#171717]">{data.email}</p>
               </div>
-
-              <div className="bg-white p-8 rounded-2xl border border-border mb-10 shadow-sm">
-                <h3 className="font-bold mb-4 text-foreground">Next Steps</h3>
-                <ul className="space-y-3 text-left text-muted-foreground max-w-xl mx-auto">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                    <span>Your application is under review by the BFL team.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                    <span>You will receive instructions for document submission via email.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                    <span>Keep your application reference number for future correspondence.</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="text-left">
-                <h3 className="font-bold mb-4 text-foreground">Support</h3>
-                <p className="text-sm text-muted-foreground">
-                  Email: piyush@biharfashionleague.com<br />
-                  Phone: 6207330072, 8709363167, 8210501502<br />
-                  Instagram: @Biharfashionleague
-                </p>
+              <div>
+                <p className="text-xs tracking-[0.28em] uppercase text-[#66645F] mb-2">Category</p>
+                <p className="text-base text-[#171717]">{data.category}</p>
               </div>
             </div>
-          )}
-
-          {status === "pending" && data && (
-            <div className="text-center py-20">
-              <div className="flex justify-center">
-                <Clock className="h-16 w-16 text-yellow-600 mx-auto mb-6 animate-spin" />
-              </div>
-              <h2 className="text-2xl font-bold mb-4">Payment Pending</h2>
-              <p className="text-muted-foreground mb-6">
-                Your application has been submitted but payment has not been verified yet.
-              </p>
-              <div className="bg-white p-6 rounded-xl border border-border">
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Application Reference</span>
-                    <p className="font-mono font-medium">{data.applicationNumber}</p>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Amount Due</span>
-                    <p className="font-bold text-primary">₹{data.amountInr}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-8">
-                <Button asChild>
-                  <Link href="/register/model/apply">Start New Application</Link>
-                </Button>
-              </div>
-            </div>
-          )}
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90">
+              <Link href="/">Back to Home</Link>
+            </Button>
+            <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5">
+              <Link href="/gallery">Explore Gallery</Link>
+            </Button>
+          </div>
         </div>
       </section>
-
       <Footer />
     </main>
   );

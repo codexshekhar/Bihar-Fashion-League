@@ -8,7 +8,6 @@ const FOOTER_LINKS = [
     title: "BFL",
     items: [
       { name: "About", href: "/about" },
-      { name: "Events", href: "/events" },
       { name: "Gallery", href: "/gallery" },
     ],
   },

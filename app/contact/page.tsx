@@ -218,7 +218,7 @@ export default function ContactPage() {
                   <Link href="/partners" className="text-sm text-[#66645F] hover:text-[#171717] transition-colors underline-offset-4 hover:underline">
                     Partnership Inquiries
                   </Link>
-                  <Link href="/events" className="text-sm text-[#66645F] hover:text-[#171717] transition-colors underline-offset-4 hover:underline">
+                  <Link href="/gallery" className="text-sm text-[#66645F] hover:text-[#171717] transition-colors underline-offset-4 hover:underline">
                     Event Updates
                   </Link>
                 </div>

@@ -54,8 +54,8 @@ export async function POST(request: Request) {
         terms_version: "1.0",
         privacy_notice_version: "1.0",
         consent_recorded_at: new Date().toISOString(),
-        application_status: isMinor && !validated.guardianConsent ? "under_review" : "awaiting_payment",
-        payment_status: "pending",
+        application_status: isMinor && !validated.guardianConsent ? "under_review" : "submitted",
+        payment_status: "exempt",
       })
       .select()
       .single();

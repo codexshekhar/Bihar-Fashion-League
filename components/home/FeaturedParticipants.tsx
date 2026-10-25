@@ -22,29 +22,26 @@ export function ParticipantCard({
   slug,
 }: ParticipantCardProps) {
   return (
-    <Link href={`/participants/${slug}`} className="block group">
-      <div className="relative">
-        <div className="relative aspect-[3/4] overflow-hidden mb-6">
-          <img
-            src={imageUrl}
-            alt={imageAlt}
-            className="h-full w-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1">
-            <p className="text-[10px] tracking-[0.28em] uppercase text-[#66645F] mb-2">{category}</p>
-            <h3 className="font-serif text-2xl sm:text-3xl tracking-tight text-[#171717] mb-1">
-              {name}
-            </h3>
-            <p className="text-sm text-[#66645F]">{title}</p>
-          </div>
-          <ArrowRight className="h-4 w-4 text-[#66645F] group-hover:text-[#171717] group-hover:translate-x-1 transition-all duration-300 mt-1" />
+    <div className="relative group">
+      <div className="relative aspect-[3/4] overflow-hidden mb-6">
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          className="h-full w-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1">
+          <p className="text-[10px] tracking-[0.28em] uppercase text-[#66645F] mb-2">{category}</p>
+          <h3 className="font-serif text-2xl sm:text-3xl tracking-tight text-[#171717] mb-1">
+            {name}
+          </h3>
+          <p className="text-sm text-[#66645F]">{title}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
@@ -77,8 +74,8 @@ export function FeaturedParticipantsSection({
             </p>
           </div>
           <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
-            <Link href="/participants">
-              View All <ArrowRight className="ml-2 h-4 w-4" />
+            <Link href="/gallery">
+              View Gallery <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
