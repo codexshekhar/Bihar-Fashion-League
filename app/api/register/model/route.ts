@@ -27,7 +27,6 @@ export async function POST(request: Request) {
         email: validated.email,
         gender: validated.gender,
         city: validated.city,
-        address: validated.residentialAddress || validated.address || null,
         height_inches: validated.heightInches,
         weight_kg: validated.weightKg || null,
         dress_size: validated.dressSize,
@@ -59,7 +58,10 @@ export async function POST(request: Request) {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      console.error("Supabase insert error:", error);
+      return NextResponse.json({ error: error.message || "Failed to submit application" }, { status: 500 });
+    }
 
     return NextResponse.json({
       success: true,
@@ -72,8 +74,8 @@ export async function POST(request: Request) {
     if (error.name === "ZodError") {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
-    console.error(error);
-    return NextResponse.json({ error: "Failed to submit application" }, { status: 500 });
+    console.error("Registration error:", error);
+    return NextResponse.json({ error: error?.message || "Failed to submit application" }, { status: 500 });
   }
 }
 
