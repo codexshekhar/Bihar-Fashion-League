@@ -147,8 +147,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FeaturedParticipantsSection participants={[]} />
-
       <section className="py-12 lg:py-16">
         <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs tracking-[0.32em] uppercase text-[#66645F] mb-4">TALENT</p>
