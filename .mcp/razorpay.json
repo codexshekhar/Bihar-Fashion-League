@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "razorpay": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@razorpay/mcp-remote"
+      ],
+      "env": {
+        "RAZORPAY_MCP_ENDPOINT": "https://mcp.razorpay.com/mcp",
+        "RAZORPAY_MERCHANT_TOKEN": "<BASE64_ENCODED_API_KEY:API_SECRET>",
+        "RAZORPAY_API_KEY": "<YOUR_RAZORPAY_KEY_ID>",
+        "RAZORPAY_API_SECRET": "<YOUR_RAZORPAY_KEY_SECRET>"
+      },
+      "description": "Razorpay MCP Server for Bihar Fashion League - enables AI assistants to interact with Razorpay payments, orders, refunds, and webhooks"
+    }
+  }
+}

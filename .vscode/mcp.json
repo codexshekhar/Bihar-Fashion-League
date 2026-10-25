@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "razorpay": {
+      "command": "npx",
+      "args": ["-y", "@razorpay/mcp-remote"],
+      "env": {
+        "RAZORPAY_MCP_ENDPOINT": "https://mcp.razorpay.com/mcp",
+        "RAZORPAY_MERCHANT_TOKEN": "${env:RAZORPAY_MERCHANT_TOKEN}",
+        "RAZORPAY_API_KEY": "${env:RAZORPAY_API_KEY}",
+        "RAZORPAY_API_SECRET": "${env:RAZORPAY_API_SECRET}"
+      },
+      "description": "Razorpay MCP Server for Bihar Fashion League"
+    }
+  }
+}
