@@ -11,11 +11,34 @@ const hasSupabaseConfig =
 export async function middleware(request: Request) {
   const requestUrl = new URL(request.url);
   const cookieStore = await cookies();
+  const pathname = requestUrl.pathname;
+
+  // Allow access to admin login without authentication
+  if (pathname === "/admin/login") {
+    if (!hasSupabaseConfig) {
+      return NextResponse.next();
+    }
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return cookieStore.get(name)?.value;
+          },
+        },
+      },
+    );
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
+    return NextResponse.next();
+  }
 
   // If Supabase is not configured, allow access (development mode)
   if (!hasSupabaseConfig) {
-    // Redirect authenticated-looking users away from login
-    if (requestUrl.pathname === "/login") {
+    if (pathname === "/login") {
       return NextResponse.redirect(new URL("/admin", request.url));
     }
     return NextResponse.next();
@@ -35,18 +58,21 @@ export async function middleware(request: Request) {
 
   const { data: { session } } = await supabase.auth.getSession();
 
-  // Protect admin routes
-  if (requestUrl.pathname.startsWith("/admin")) {
+  // Protect admin routes (excluding /admin/login already handled)
+  if (pathname.startsWith("/admin")) {
     if (!session) {
-      const redirectUrl = new URL("/login", request.url);
-      redirectUrl.searchParams.set("redirectTo", requestUrl.pathname);
+      const redirectUrl = new URL("/admin/login", request.url);
+      const redirectTo = requestUrl.pathname + requestUrl.search;
+      if (redirectTo && redirectTo !== "/admin/login") {
+        redirectUrl.searchParams.set("redirectTo", redirectTo);
+      }
       return NextResponse.redirect(redirectUrl);
     }
     return NextResponse.next();
   }
 
   // Redirect authenticated users away from login page
-  if (requestUrl.pathname === "/login" && session) {
+  if (pathname === "/login" && session) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
