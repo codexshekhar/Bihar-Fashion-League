@@ -34,7 +34,7 @@ export function SponsorCard({
           <img
             src={logoUrl}
             alt={logoAlt || name}
-            className="h-10 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+            className="h-12 w-auto max-w-[160px] object-contain opacity-80 group-hover:opacity-100 transition-opacity"
             loading="lazy"
           />
         ) : null}

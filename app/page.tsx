@@ -90,7 +90,24 @@ export default function HomePage() {
             <h2 className="font-serif text-2xl sm:text-3xl text-[#171717]">Sponsors &amp; Partners</h2>
             <p className="mt-3 text-base text-[#66645F]">Brands that share our vision for fashion in Bihar.</p>
           </div>
-          <PartnersSection sponsors={[]} />
+          <PartnersSection
+            sponsors={[
+              {
+                id: "idt",
+                name: "IDT",
+                logoUrl: "/images/Sponsers/IDT%20Logo%20White.png",
+                logoAlt: "IDT",
+                tier: "title",
+              },
+              {
+                id: "sla",
+                name: "SLA",
+                logoUrl: "/images/Sponsers/SLA%20LOGO%20WITH%20TM.png",
+                logoAlt: "SLA",
+                tier: "event",
+              },
+            ]}
+          />
         </div>
       </section>
 
