@@ -19,7 +19,7 @@ export function UpcomingEventSection({
   venue,
   description,
   registrationOpen = false,
-  registrationUrl = "/register",
+  registrationUrl = "/register/model",
 }: UpcomingEventSectionProps) {
   if (!date && !title) {
     return (

@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "http://localhost:3000";
-  const routes = ["", "/about", "/participants", "/events", "/gallery", "/partners", "/news", "/contact", "/register"];
+  const routes = ["", "/about", "/participants", "/events", "/gallery", "/partners", "/news", "/contact", "/register/model"];
 
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,

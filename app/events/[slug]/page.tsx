@@ -74,7 +74,7 @@ export default function EventDetailPage() {
           
           <div className="mt-16 flex justify-center">
             <Button size="lg" asChild>
-              <Link href="/register">
+              <Link href="/register/model">
                 Register Now
               </Link>
             </Button>

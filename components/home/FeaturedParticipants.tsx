@@ -22,31 +22,26 @@ export function ParticipantCard({
   slug,
 }: ParticipantCardProps) {
   return (
-    <Link href={`/participants/${slug}`} className="block">
-      <div className="relative group">
-        <div className="relative h-[400px] lg:h-[500px] overflow-hidden mb-8">
+    <Link href={`/participants/${slug}`} className="block group">
+      <div className="relative">
+        <div className="relative aspect-[3/4] overflow-hidden mb-6">
           <img
             src={imageUrl}
             alt={imageAlt}
-            className="h-full w-full object-cover object-center group-hover:scale-[1.05] transition-transform duration-1000"
+            className="h-full w-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          <div className="absolute bottom-6 left-6 z-10">
-            <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] font-light tracking-widest uppercase">
-              {category}
-            </span>
-          </div>
         </div>
-        <div className="flex items-start justify-between gap-6">
+        <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <h3 className="text-3xl lg:text-4xl font-bold tracking-tighter mb-2 group-hover:text-primary transition-colors font-serif">
+            <p className="text-[10px] tracking-[0.28em] uppercase text-[#66645F] mb-2">{category}</p>
+            <h3 className="font-serif text-2xl sm:text-3xl tracking-tight text-[#171717] mb-1">
               {name}
             </h3>
-            <p className="text-base text-muted-foreground font-light">{title}</p>
+            <p className="text-sm text-[#66645F]">{title}</p>
           </div>
-          <ArrowRight className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors group-hover:translate-x-2 transition-transform duration-300" />
+          <ArrowRight className="h-4 w-4 text-[#66645F] group-hover:text-[#171717] group-hover:translate-x-1 transition-all duration-300 mt-1" />
         </div>
       </div>
     </Link>
@@ -67,42 +62,39 @@ export function FeaturedParticipantsSection({
   }>;
 }) {
   return (
-    <section className="relative py-32 lg:py-48 bg-[#FAFAF9] overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row justify-between items-end lg:items-start gap-12 mb-24">
+    <section className="py-16 lg:py-24">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-12 lg:mb-16">
           <div>
-            <span className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium tracking-widest uppercase">
-              Featured Talent
-            </span>
-            <h2 className="text-6xl lg:text-7xl font-bold tracking-tighter mb-6 font-serif leading-[0.9]">
-              Participants
+            <p className="text-sm tracking-[0.28em] uppercase text-[#66645F] mb-4">
+              Celebrating the Faces and Designers of BFL
+            </p>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight text-[#171717] mb-4">
+              Talent Shaping Bihar&apos;s Fashion Community
             </h2>
-            <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl font-light">
-              Meet the talent shaping Bihar's fashion future.
+            <p className="text-base leading-relaxed text-[#66645F] max-w-[620px]">
+              Discover the talent, creativity, and individuality shaping Bihar&apos;s fashion community.
             </p>
           </div>
-          <Button asChild size="lg" className="px-10 py-6 text-base tracking-wide">
+          <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
             <Link href="/participants">
-              View All Participants <ArrowRight className="ml-3 h-5 w-5" />
+              View All <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {participants.length > 0 ? (
-            participants.map((p) => (
-              <ParticipantCard key={p.id} {...p} />
-            ))
+            participants.map((p) => <ParticipantCard key={p.id} {...p} />)
           ) : (
-            <div className="col-span-full text-center py-32">
-              <p className="text-lg text-muted-foreground font-light">
-                No featured participants available. Check back soon.
+            <div className="col-span-full text-center py-16">
+              <p className="text-base text-[#66645F]">
+                Participant highlights will be announced soon.
               </p>
             </div>
           )}
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 h-px bg-black/5" />
     </section>
   );
 }

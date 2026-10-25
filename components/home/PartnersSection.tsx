@@ -12,10 +12,10 @@ interface SponsorCardProps {
 }
 
 const tierConfig: Record<string, { label: string }> = {
-  title: { label: "Title Sponsor" },
-  event: { label: "Event Partner" },
+  title: { label: "Headline Sponsor" },
+  event: { label: "Official Event Partner" },
   media: { label: "Media Partner" },
-  collaborator: { label: "Collaborator" },
+  collaborator: { label: "Associate Partner" },
 };
 
 export function SponsorCard({
@@ -26,30 +26,37 @@ export function SponsorCard({
   tier,
   website,
 }: SponsorCardProps) {
-  const config = tierConfig[tier];
-  return (
-    <Link href={website || "#"} className="block group">
-      <div className="border-b border-black/10 py-8 group-hover:border-primary/30 transition-colors">
-        <div className="flex items-center gap-8">
+  const config = tierConfig[tier] || { label: tier };
+  const content = (
+    <div className="flex items-center justify-between py-6 border-b border-[#E5E2DC] group">
+      <div className="flex items-center gap-6">
+        {logoUrl ? (
           <img
             src={logoUrl}
-            alt={logoAlt}
-            className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-[filter] duration-700"
+            alt={logoAlt || name}
+            className="h-10 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
             loading="lazy"
           />
-          <div className="flex-1 border-l border-black/10 pl-8">
-            <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest block mb-2">
-              {config.label}
-            </span>
-            <h3 className="text-2xl font-bold tracking-tight group-hover:text-primary transition-colors">
-              {name}
-            </h3>
-          </div>
-          <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+        ) : null}
+        <div>
+          <span className="text-[10px] tracking-[0.28em] uppercase text-[#66645F] block mb-1">
+            {config.label}
+          </span>
+          <p className="text-base font-medium text-[#171717]">{name}</p>
         </div>
       </div>
-    </Link>
+      {website ? <ArrowRight className="h-4 w-4 text-[#66645F] group-hover:text-[#171717] transition-colors" /> : null}
+    </div>
   );
+
+  if (website) {
+    return (
+      <Link href={website} target="_blank" rel="noopener noreferrer">
+        {content}
+      </Link>
+    );
+  }
+  return <div>{content}</div>;
 }
 
 export function PartnersSection({
@@ -58,38 +65,26 @@ export function PartnersSection({
   sponsors?: Array<SponsorCardProps>;
 }) {
   return (
-    <section className="relative py-32 lg:py-48 bg-white overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col justify-center items-start text-center lg:text-start max-w-3xl mx-auto mb-24">
-          <h2 className="text-6xl lg:text-7xl font-bold leading-[0.9] tracking-tighter mb-8">
-            Partners &amp; Sponsors
-          </h2>
-          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-            Collaborating with brands that share our vision for fashion.
-          </p>
-        </div>
-
-        <div className="space-y-0">
-          {sponsors.length > 0 ? (
-            sponsors.map((s) => <SponsorCard key={s.id} {...s} />)
-          ) : (
-            <div className="border-b border-black/10 py-24 text-center">
-              <p className="text-lg text-muted-foreground">
-                Sponsor information will be announced soon.
-              </p>
-            </div>
-          )}
-        </div>
-
-        <div className="mt-24 flex justify-center">
-          <Button asChild size="lg">
-            <Link href="/partners">
-              Partner With BFL
-            </Link>
-          </Button>
-        </div>
+    <section className="relative">
+      <div className="space-y-0">
+        {sponsors.length > 0 ? (
+          sponsors.map((s) => <SponsorCard key={s.id} {...s} />)
+        ) : (
+          <div className="py-10 text-center border-b border-[#E5E2DC]">
+            <p className="text-base text-[#66645F]">
+              Sponsor and partner information will be announced soon.
+            </p>
+          </div>
+        )}
       </div>
-      <div className="absolute inset-x-0 bottom-0 h-px bg-black/20" />
+
+      <div className="mt-10 text-center">
+        <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
+          <Link href="/partners">
+            Partner With BFL <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
     </section>
   );
 }

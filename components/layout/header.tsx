@@ -30,7 +30,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Check auth status on mount
   useEffect(() => {
     let mounted = true;
     async function checkAuth() {
@@ -57,69 +56,69 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-[color,background-color,border-color] duration-300",
-        scrolled ? "bg-white border-b border-black/10" : "bg-transparent",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled
+          ? "bg-[#F8F7F0]/95 backdrop-blur-sm border-b border-[#E5E2DC]"
+          : "bg-[#F8F7F0]/80 backdrop-blur-[2px]",
       )}
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+      <div className="relative z-10 mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 sm:h-[72px] items-center justify-between gap-8">
           <Link
             href="/"
-            className="flex items-center gap-3 text-3xl font-bold tracking-tighter text-primary"
+            className="flex items-center text-xl sm:text-2xl font-bold tracking-tight text-[#171717] shrink-0"
           >
-            <span className="relative">
-              <span className="absolute -inset-px block bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              BFL
-            </span>
+            BFL
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-10">
+          <nav className="hidden lg:flex items-center gap-7 xl:gap-9 flex-1 justify-center">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-base font-medium tracking-tight transition-colors",
-                  scrolled
-                    ? pathname === item.href
-                      ? "text-primary"
-                      : "text-foreground"
-                    : "text-white",
+                  "text-sm font-medium tracking-tight transition-colors hover:text-[#171717]",
+                  pathname === item.href
+                    ? "text-[#171717]"
+                    : "text-[#66645F]",
                 )}
               >
                 {item.name}
               </Link>
             ))}
+          </nav>
+
+          <div className="hidden lg:flex items-center gap-4 shrink-0">
             {isAuthenticated ? (
               <>
-                <Button asChild size="sm" className="px-6 py-3 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90">
+                <Button asChild size="sm" className="h-9 px-5 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
                   <Link href="/admin">Admin Dashboard</Link>
                 </Button>
                 <button
                   onClick={handleSignOut}
-                  className="px-6 py-3 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90 rounded-full transition-colors"
+                  className="text-sm font-medium text-[#66645F] hover:text-[#171717] transition-colors"
                 >
                   Sign Out
                 </button>
               </>
             ) : (
               <>
-                <Button asChild size="sm" className="px-6 py-3 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90">
-                  <Link href="/register">Register Now</Link>
+                <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
+                  <Link href="/register/model">Register Now</Link>
                 </Button>
                 <button
                   onClick={() => router.push("/login")}
-                  className="px-6 py-3 text-sm font-medium tracking-tight text-white hover:bg-white/20 rounded-full transition-colors"
+                  className="text-sm font-medium text-[#66645F] hover:text-[#171717] transition-colors"
                 >
                   Admin Login
                 </button>
               </>
             )}
-          </nav>
+          </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 lg:hidden">
             <button
-              className="md:hidden p-2 text-foreground hover:text-primary"
+              className="p-2 text-[#171717] hover:text-[#171717]/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717]/20 rounded-md"
               onClick={() => setIsOpen(true)}
               aria-label="Open navigation menu"
             >
@@ -130,57 +129,53 @@ export default function Header() {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm">
-          <div className="absolute top-6 right-6">
+        <div className="fixed inset-0 z-40 bg-[#F8F7F0]">
+          <div className="absolute top-5 right-4 sm:right-6">
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 text-foreground hover:text-primary"
+              className="p-2 text-[#171717] hover:text-[#171717]/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717]/20 rounded-md"
               aria-label="Close navigation menu"
             >
               <X className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-24 px-6 space-y-12">
+          <div className="mt-20 px-6 space-y-6">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "text-3xl font-bold tracking-tighter block transition-colors",
-                  scrolled
-                    ? pathname === item.href
-                      ? "text-primary"
-                      : "text-foreground"
-                    : "text-white",
+                  "text-2xl sm:text-3xl font-serif font-semibold tracking-tight block transition-colors",
+                  pathname === item.href ? "text-[#171717]" : "text-[#66645F]",
                 )}
               >
                 {item.name}
               </Link>
             ))}
             {isAuthenticated ? (
-              <div className="space-y-4">
-                <Button asChild size="lg" className="w-full px-8 py-4 bg-white text-primary hover:bg-white/90">
+              <div className="space-y-3 pt-8">
+                <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
                   <Link href="/admin">Admin Dashboard</Link>
                 </Button>
                 <button
                   onClick={handleSignOut}
-                  className="w-full px-8 py-4 text-sm font-medium tracking-tight bg-white text-primary hover:bg-white/90 rounded-full transition-colors"
+                  className="w-full h-12 text-base font-medium text-[#66645F] hover:text-[#171717] transition-colors"
                 >
                   Sign Out
                 </button>
               </div>
             ) : (
-              <div className="space-y-4 pt-8">
-                <Button asChild size="lg" className="w-full px-8 py-4 bg-white text-primary hover:bg-white/90">
-                  <Link href="/register">Register Now</Link>
+              <div className="space-y-3 pt-8">
+                <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
+                  <Link href="/register/model">Register Now</Link>
                 </Button>
                 <button
                   onClick={() => {
                     setIsOpen(false);
                     router.push("/login");
                   }}
-                  className="w-full px-8 py-4 text-sm font-medium tracking-tight text-white hover:bg-white/20 rounded-full transition-colors"
+                  className="w-full h-12 text-base font-medium text-[#66645F] hover:text-[#171717] transition-colors"
                 >
                   Admin Login
                 </button>

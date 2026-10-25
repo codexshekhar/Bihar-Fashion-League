@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/header";
@@ -13,112 +14,173 @@ import { GallerySection } from "@/components/home/GallerySection";
 import { PressAndNewsSection } from "@/components/home/PressAndNews";
 import { CollabCtaSection } from "@/components/home/CollabCta";
 import { FaqSection } from "@/components/home/FaqSection";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { FeaturedParticipantsSection } from "@/components/home/FeaturedParticipants";
 
 export default function HomePage() {
   return (
-    <main className="relative bg-[#FAFAF9]">
+    <main className="relative bg-[#F8F7F0]">
       <Header />
-      
-      <section className="relative min-h-[100svh] flex items-start justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <motion.div
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.8, ease: "easeOut" }}
-            className="absolute inset-0 bg-[url('/images/BFL_2025_12.jpeg')] bg-cover bg-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-        </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-24">
-          <div className="max-w-5xl text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            >
-              <span className="inline-block mb-8 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium tracking-[0.3em] uppercase">
+      <section className="relative pt-32 sm:pt-36 lg:pt-44 pb-20 lg:pb-28">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6 xl:col-span-5">
+              <span className="inline-flex items-center mb-6 px-4 py-1 text-xs tracking-[0.28em] uppercase text-[#66645F]">
                 Bihar Fashion League
               </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-              className="mb-6 text-[clamp(2.75rem,8vw,5rem)] font-bold tracking-tight text-white leading-[1.05] font-serif"
-            >
-              THE NEXT GENERATION OF FASHION STARTS HERE
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-              className="mb-10 text-lg lg:text-xl text-white/90 max-w-xl leading-relaxed font-light"
-            >
-              Discover emerging talent, runway moments, and the people shaping the future of fashion with Bihar Fashion League.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row gap-5"
-            >
-              <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-10 py-5 text-base font-medium tracking-wide transition-all duration-300 shadow-lg">
-                Explore BFL <ArrowRight className="ml-3 h-5 w-5" />
+              <h1 className="font-serif text-[clamp(2.8rem,6.5vw,5.6rem)] leading-[0.95] tracking-tight text-[#171717] mb-6">
+                Where Bihar&apos;s Next Generation of Fashion Begins
+              </h1>
+              <p className="text-base sm:text-lg leading-relaxed text-[#66645F] max-w-[520px] mb-9">
+                Bihar Fashion League showcases emerging runway talent, celebrates creative voices, and opens doors to fashion, design, and opportunity across Bihar and beyond.
+              </p>
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
+                <Link href="/register/model">
+                  Register Now
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary px-10 py-5 text-base font-medium tracking-wide backdrop-blur-sm transition-all duration-300">
-                Register Now
-              </Button>
-            </motion.div>
+                <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
+                  <Link href="/gallery">
+                    Explore BFL <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="lg:col-span-6 xl:col-span-7 relative">
+              <div className="relative h-[420px] sm:h-[520px] lg:h-[620px]">
+                <div className="absolute top-0 right-0 w-[78%] sm:w-[72%] h-[78%] sm:h-[74%] shadow-[0_40px_80px_-60px_rgba(23,23,23,0.9)]">
+                  <Image
+                    src="/images/BFL_2025_12.jpeg"
+                    alt="BFL runway moment"
+                    fill
+                    className="object-cover object-[center_20%]"
+                    sizes="(max-width: 1024px) 90vw, 55vw"
+                    priority
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 w-[58%] sm:w-[52%] h-[58%] sm:h-[56%] shadow-[0_40px_80px_-60px_rgba(23,23,23,0.9)]">
+                  <Image
+                    src="/images/BFL_2025_5.jpeg"
+                    alt="BFL model on runway"
+                    fill
+                    className="object-cover object-[center_25%]"
+                    sizes="(max-width: 1024px) 70vw, 40vw"
+                  />
+                </div>
+                <div className="hidden md:block absolute top-[16%] left-[24%] w-[36%] h-[44%] shadow-[0_40px_80px_-60px_rgba(23,23,23,0.9)]">
+                  <Image
+                    src="/images/BFL_2025_9.jpeg"
+                    alt="BFL backstage moment"
+                    fill
+                    className="object-cover object-[center_25%]"
+                    sizes="(max-width: 1024px) 40vw, 30vw"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center"
-          >
-            <ArrowRight className="w-4 h-4 text-white rotate-90" />
-          </motion.div>
-        </motion.div>
       </section>
 
-      <section className="py-20 bg-white border-t border-black/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold tracking-tight mb-6">Follow BFL</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Stay connected with Bihar Fashion League on Instagram for the latest runway moments,
-              backstage stories, and announcements.
+      <section className="py-12 lg:py-16">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-sm tracking-[0.28em] uppercase text-[#66645F] mb-3">Our Partners</p>
+            <h2 className="font-serif text-2xl sm:text-3xl text-[#171717]">Sponsors &amp; Partners</h2>
+            <p className="mt-3 text-base text-[#66645F]">Brands that share our vision for fashion in Bihar.</p>
+          </div>
+          <PartnersSection sponsors={[]} />
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-24">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <div className="lg:col-span-7 relative">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src="/images/BFL_2025_10.jpeg"
+                  alt="BFL runway highlights"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 65vw"
+                />
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="text-sm tracking-[0.28em] uppercase text-[#66645F] mb-4">Runway Highlights</p>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight text-[#171717] mb-5">Moments from the BFL Runway</h2>
+              <p className="text-base leading-relaxed text-[#66645F] mb-8 max-w-[420px]">
+                A look back at standout looks, emerging talent, and the energy that defines Bihar Fashion League.
+              </p>
+              <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
+                <Link href="/gallery">
+                  Watch Highlights <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <FeaturedParticipantsSection participants={[]} />
+
+      <section className="py-16 lg:py-24">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden">
+            <div className="absolute inset-0">
+              <Image
+                src="/images/BFL_2025_11.jpeg"
+                alt="BFL runway"
+                fill
+                className="object-cover object-[center_30%]"
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-black/60" />
+            </div>
+            <div className="relative z-10 text-center py-16 sm:py-20 lg:py-28 px-4">
+              <p className="text-sm tracking-[0.28em] uppercase text-white/80 mb-4">Join Us</p>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white mb-4">Your Runway Journey Starts Here</h2>
+              <p className="text-base sm:text-lg text-white/85 max-w-[620px] mx-auto mb-8">
+                Eligible participants can register for Bihar Fashion League and take their first step onto the runway.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                <Button asChild className="h-11 px-7 bg-white text-[#171717] hover:bg-white/90 text-sm tracking-wide">
+                  <Link href="/register/model">
+                    Register Now
+                  </Link>
+                </Button>
+                <Button asChild variant="ghost" className="h-11 px-7 text-white hover:bg-white/10 text-sm tracking-wide">
+                  <Link href="/events">
+                    Explore the Event <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-24">
+        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl sm:text-4xl text-[#171717] mb-3">Follow BFL</h2>
+            <p className="text-base text-[#66645F] max-w-2xl mx-auto">
+              Stay connected with Bihar Fashion League on Instagram for the latest runway moments, backstage stories, and announcements.
             </p>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-              <div key={i} className="relative aspect-square overflow-hidden rounded-xl bg-gray-100 group">
+              <div key={i} className="relative aspect-square overflow-hidden bg-[#E5E2DC] group">
                 <Image
                   src={`/images/BFL_2025_${i}.jpeg`}
                   alt={`BFL Instagram gallery image ${i}`}
                   fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 16vw"
+                  className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 16vw"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <Camera className="h-6 w-6 text-white" />
-                </div>
                 <a
                   href="https://www.instagram.com/biharfashionleague"
                   target="_blank"
@@ -128,9 +190,8 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-
-          <div className="mt-8 text-center">
-            <Button asChild variant="outline" className="px-8 py-3 text-sm font-medium tracking-wide">
+          <div className="mt-10 text-center">
+            <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
               <Link href="https://www.instagram.com/biharfashionleague" target="_blank" rel="noopener noreferrer">
                 View on Instagram <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -142,12 +203,11 @@ export default function HomePage() {
       <AboutSection />
       <FashionCategoriesSection />
       <UpcomingEventSection />
-      <PartnersSection />
       <GallerySection />
       <PressAndNewsSection />
       <CollabCtaSection />
       <FaqSection />
-      
+
       <Footer />
     </main>
   );
