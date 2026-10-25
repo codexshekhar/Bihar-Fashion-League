@@ -24,14 +24,14 @@ export default function AdminEventsPage() {
           <EventCard
             title="Bihar Fashion Week 2024"
             date="Nov 15-17, 2024"
-            venue="Patna, Bihar"
+            venue="Muzaffarpur, Bihar"
             status="published"
             image=""
           />
           <EventCard
             title="Designer Showcase Spring 2024"
             date="Mar 10-12, 2024"
-            venue="Patna, Bihar"
+            venue="Muzaffarpur, Bihar"
             status="archived"
             image=""
           />

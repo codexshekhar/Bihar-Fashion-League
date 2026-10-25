@@ -42,7 +42,7 @@ function useReveal() {
 const CONTACT_INFO = {
   email: "piyush@biharfashionleague.com",
   phone: "6207330072, 8709363167, 8210501502",
-  location: "Patna, Bihar, India",
+  location: "Muzaffarpur, Bihar, India",
   instagram: "https://www.instagram.com/biharfashionleague",
 };
 
@@ -195,7 +195,7 @@ export default function ContactPage() {
                   <MapPin className="h-5 w-5 text-[#66645F] mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-[#171717] mb-1">Location</p>
-                    <p className="text-base text-[#66645F]">Patna, Bihar, India</p>
+                    <p className="text-base text-[#66645F]">Muzaffarpur, Bihar, India</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
