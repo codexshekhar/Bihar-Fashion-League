@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/layout/header";
@@ -55,50 +55,8 @@ const GALLERY_ITEMS = GALLERY_FILES.map((file, index) => ({
   alt: `Bihar Fashion League gallery image ${index + 1}`,
 }));
 
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-      element.classList.add("reveal-visible");
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            element.classList.add("reveal-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
-
-  return ref;
-}
-
 export default function GalleryPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const gridRef = useReveal();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-    const el = heroRef.current;
-    if (!el) return;
-    el.classList.add("hero-revealed");
-  }, []);
 
   useEffect(() => {
     if (lightboxIndex !== null) {
@@ -135,55 +93,11 @@ export default function GalleryPage() {
 
   return (
     <main className="relative bg-[#F8F7F0]">
-      <style jsx global>{`
-        .reveal {
-          opacity: 0;
-          transform: translateY(24px);
-          transition: opacity 700ms ease, transform 700ms ease;
-        }
-        .reveal-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .hero-fade {
-          opacity: 0;
-          transform: translateY(18px);
-          transition: opacity 900ms ease, transform 900ms ease;
-        }
-        .hero-revealed .hero-fade {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .hero-revealed .hero-fade-delay-1 {
-          transition-delay: 120ms;
-        }
-        .hero-revealed .hero-fade-delay-2 {
-          transition-delay: 220ms;
-        }
-        .tile-reveal {
-          opacity: 0;
-          transform: translateY(16px);
-          transition: opacity 650ms ease, transform 650ms ease;
-        }
-        .reveal-visible .tile-reveal {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .reveal,
-          .hero-fade,
-          .tile-reveal {
-            opacity: 1 !important;
-            transform: none !important;
-            transition: none !important;
-          }
-        }
-      `}</style>
       <Header />
 
       <section className="relative pt-28 sm:pt-32">
         <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-          <div ref={heroRef} className="relative overflow-hidden min-h-[360px] sm:min-h-[420px] lg:min-h-[460px] flex items-center">
+          <div className="relative overflow-hidden min-h-[360px] sm:min-h-[420px] lg:min-h-[460px] flex items-center">
             <div className="absolute inset-0">
               <img
                 src="/images/BFL_2025_16.jpeg"
@@ -194,13 +108,13 @@ export default function GalleryPage() {
               <div className="absolute inset-0 bg-black/55" />
             </div>
             <div className="relative z-10 px-6 sm:px-10 lg:px-16 max-w-3xl">
-              <p className="hero-fade text-xs tracking-[0.32em] uppercase text-white/80 mb-5">
+              <p className="text-xs tracking-[0.32em] uppercase text-white/80 mb-5">
                 THE ARCHIVE
               </p>
-              <h1 className="hero-fade hero-fade-delay-1 font-serif text-[clamp(2.8rem,7vw,5.2rem)] leading-[0.95] text-white mb-6">
+              <h1 className="font-serif text-[clamp(2.8rem,7vw,5.2rem)] leading-[0.95] text-white mb-6">
                 The BFL Gallery
               </h1>
-              <p className="hero-fade hero-fade-delay-2 text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
                 Relive the runway moments, celebrate the talent, and explore the stories behind Bihar Fashion League.
               </p>
             </div>
@@ -210,13 +124,12 @@ export default function GalleryPage() {
 
       <section className="py-16 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          <div ref={gridRef} className="reveal columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
             {GALLERY_ITEMS.map((item, index) => (
               <button
                 key={item.id}
                 onClick={() => openLightbox(index)}
-                className="tile-reveal mb-4 w-full break-inside-avoid overflow-hidden focus:outline-none focus:ring-1 focus:ring-[#171717]"
-                style={{ transitionDelay: `${Math.min(index % 12, 11) * 40}ms` }}
+                className="mb-4 w-full break-inside-avoid overflow-hidden focus:outline-none focus:ring-1 focus:ring-[#171717]"
                 aria-label={item.alt}
               >
                 <Image
