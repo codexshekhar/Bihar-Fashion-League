@@ -10,7 +10,6 @@ import { AboutSection } from "@/components/home/AboutSection";
 import { FashionCategoriesSection } from "@/components/home/FashionCategories";
 import { UpcomingEventSection } from "@/components/home/UpcomingEvent";
 import { PartnersSection } from "@/components/home/PartnersSection";
-import { GallerySection } from "@/components/home/GallerySection";
 import { PressAndNewsSection } from "@/components/home/PressAndNews";
 import { CollabCtaSection } from "@/components/home/CollabCta";
 import { FaqSection } from "@/components/home/FaqSection";
@@ -229,7 +228,6 @@ export default function HomePage() {
       <FashionCategoriesSection />
       <UpcomingEventSection />
       <FashionCategoriesSection />
-      <GallerySection />
       <FaqSection />
 
       <Footer />
