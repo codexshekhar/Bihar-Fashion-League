@@ -5,7 +5,7 @@ import Footer from "@/components/layout/footer";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users, Calendar, Image as ImageIcon, FileText, Mail, Shield, Clock } from "lucide-react";
+import { Users, Calendar, Image as ImageIcon, FileText, Mail, Shield, Clock, CreditCard } from "lucide-react";
 
 interface StatCardProps {
   title: string;
@@ -59,6 +59,13 @@ export default function AdminDashboardPage() {
               value="24"
               description="Published gallery items"
               href="/admin/gallery"
+            />
+            <StatCard
+              title="Total Registration Fees"
+              icon={CreditCard}
+              value="₹0"
+              description="Collected from verified payments"
+              href="/admin/registrations"
             />
           </div>
 
