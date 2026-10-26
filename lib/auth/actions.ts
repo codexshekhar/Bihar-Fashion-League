@@ -4,6 +4,10 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
+function getSupabaseAnonKey(): string {
+  return process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+}
+
 function isValidRedirectUrl(url: string | null): string | null {
   if (!url) return null;
   if (url.startsWith("/") && !url.startsWith("//")) {
@@ -20,10 +24,10 @@ export async function signIn(formData: FormData) {
   const redirectTo = formData.get("redirectTo") as string | null;
   
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseKey = getSupabaseAnonKey();
   
   if (!supabaseUrl || !supabaseKey) {
-    redirect(`/admin/login?error=${encodeURIComponent("Supabase configuration missing. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.")}`);
+    redirect(`/admin/login?error=${encodeURIComponent("Supabase configuration missing. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY/NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY.")}`);
   }
   
   const supabase = await createClient();
@@ -34,9 +38,8 @@ export async function signIn(formData: FormData) {
   });
 
   if (error) {
-    // Don't expose raw API key errors as credentials errors
     if (error.message?.toLowerCase().includes("api key") || error.message?.toLowerCase().includes("invalid key")) {
-      redirect(`/admin/login?error=${encodeURIComponent("Invalid Supabase API key. Verify NEXT_PUBLIC_SUPABASE_ANON_KEY matches the project in Settings → API.")}`);
+      redirect(`/admin/login?error=${encodeURIComponent("Invalid Supabase API key. Verify NEXT_PUBLIC_SUPABASE_ANON_KEY or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY matches the project in Settings → API.")}`);
     }
     redirect(`/admin/login?error=${encodeURIComponent(error.message)}`);
   }

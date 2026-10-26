@@ -128,7 +128,7 @@ Private — Bihar Fashion League
    ```
 2. Configure the required variables in `.env.local`:
    - `NEXT_PUBLIC_SUPABASE_URL` - From Supabase Dashboard → Settings → API
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - From Supabase Dashboard → Settings → API (anon/public key). Never use service-role key in browser.
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` OR `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - From Supabase Dashboard → Settings → API (anon/public key). The code accepts either. Never use service-role key in browser.
    - `ADMIN_EMAIL_ALLOWLIST` - Comma-separated emails authorized for admin access (e.g. `piyush@biharfashionleague.com`). Case-insensitive.
    - `SUPABASE_SERVICE_ROLE_KEY` - Server-side only (never commit/expose to browser)
    - `SESSION_SECRET` - Generate with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
