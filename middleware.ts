@@ -47,7 +47,11 @@ export async function middleware(request: NextRequest) {
 
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
-      return NextResponse.redirect(new URL("/admin", request.url));
+      const redirectResponse = NextResponse.redirect(new URL("/admin", request.url));
+      response.cookies.getAll().forEach((cookie) => {
+        redirectResponse.cookies.set(cookie.name, cookie.value);
+      });
+      return redirectResponse;
     }
     return response;
   }
@@ -98,14 +102,22 @@ export async function middleware(request: NextRequest) {
       if (redirectTo && redirectTo !== "/admin/login") {
         redirectUrl.searchParams.set("redirectTo", redirectTo);
       }
-      return NextResponse.redirect(redirectUrl);
+      const redirectResponse = NextResponse.redirect(redirectUrl);
+      response.cookies.getAll().forEach((cookie) => {
+        redirectResponse.cookies.set(cookie.name, cookie.value);
+      });
+      return redirectResponse;
     }
     return response;
   }
 
   // Redirect authenticated users away from login page
   if (pathname === "/login" && session) {
-    return NextResponse.redirect(new URL("/admin", request.url));
+    const redirectResponse = NextResponse.redirect(new URL("/admin", request.url));
+    response.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie.name, cookie.value);
+    });
+    return redirectResponse;
   }
 
   return response;
