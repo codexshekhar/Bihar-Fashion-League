@@ -1,36 +1,38 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
+import { useFormStatus } from "react-dom";
 import { signIn } from "@/lib/auth/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, Lock, AlertTriangle, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button 
+      type="submit" 
+      className="w-full h-11 bg-[#171717] text-white hover:bg-[#171717]/90"
+      disabled={pending}
+    >
+      {pending ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Signing in...
+        </>
+      ) : (
+        "Sign In"
+      )}
+    </Button>
+  );
+}
+
 export default function AdminLoginClient() {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | undefined>();
-  const [isPending, startTransition] = useTransition();
   const searchParams = useSearchParams();
   const urlError = searchParams?.get("error") || undefined;
   const redirectTo = searchParams?.get("redirectTo") || undefined;
-
-  const displayError = error || urlError;
-
-  async function handleSubmit(formData: FormData) {
-    setError(undefined);
-    startTransition(async () => {
-      try {
-        await signIn(formData);
-      } catch (e: any) {
-        // Next.js redirects throw errors - let them propagate for redirects
-        if (e?.digest?.startsWith('NEXT_REDIRECT')) {
-          throw e;
-        }
-        setError(e?.message || "An unexpected error occurred. Please try again.");
-      }
-    });
-  }
 
   return (
     <main className="min-h-screen bg-[#F8F7F0] flex items-center justify-center">
@@ -43,14 +45,14 @@ export default function AdminLoginClient() {
           </p>
         </div>
 
-        {displayError && (
+        {urlError && (
           <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 text-red-700 flex items-center gap-3">
             <AlertTriangle className="h-4 w-4 flex-shrink-0" />
-            <span className="text-sm">{displayError}</span>
+            <span className="text-sm">{urlError}</span>
           </div>
         )}
 
-        <form action={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg border border-[#E5E2DC] shadow-sm">
+        <form action={signIn} className="space-y-6 bg-white p-8 rounded-lg border border-[#E5E2DC] shadow-sm">
           {redirectTo && <input type="hidden" name="redirectTo" value={redirectTo} />}
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-[#171717]">
@@ -63,7 +65,6 @@ export default function AdminLoginClient() {
                 name="email"
                 type="email"
                 required
-                disabled={isPending}
                 placeholder="admin@example.com"
                 className="flex-1"
                 autoComplete="email"
@@ -81,7 +82,6 @@ export default function AdminLoginClient() {
                 name="password"
                 type={showPassword ? "text" : "password"}
                 required
-                disabled={isPending}
                 placeholder="••••••••"
                 className="flex-1"
                 autoComplete="current-password"
@@ -91,26 +91,12 @@ export default function AdminLoginClient() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="p-1 text-[#66645F] hover:text-[#171717]"
                 aria-label="Toggle password visibility"
-                disabled={isPending}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
           </div>
-          <Button 
-            type="submit" 
-            className="w-full h-11 bg-[#171717] text-white hover:bg-[#171717]/90"
-            disabled={isPending}
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Signing in...
-              </>
-            ) : (
-              "Sign In"
-            )}
-          </Button>
+          <SubmitButton />
         </form>
       </section>
     </main>
