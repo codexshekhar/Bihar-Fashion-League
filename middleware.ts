@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
 const hasSupabaseConfig =
   process.env.NEXT_PUBLIC_SUPABASE_URL &&
@@ -8,49 +7,82 @@ const hasSupabaseConfig =
   process.env.NEXT_PUBLIC_SUPABASE_URL !== "" &&
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY !== "";
 
-export async function middleware(request: Request) {
+export async function middleware(request: NextRequest) {
   const requestUrl = new URL(request.url);
-  const cookieStore = await cookies();
   const pathname = requestUrl.pathname;
 
-  // Allow access to admin login without authentication
+  // Allow access to admin login without authentication - prevent any redirects
   if (pathname === "/admin/login") {
     if (!hasSupabaseConfig) {
       return NextResponse.next();
     }
+    let response = NextResponse.next({
+      request: {
+        headers: request.headers,
+      },
+    });
+
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
         cookies: {
-          get(name: string) {
-            return cookieStore.get(name)?.value;
+          getAll() {
+            return request.cookies.getAll();
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+            response = NextResponse.next({
+              request: {
+                headers: request.headers,
+              },
+            });
+            cookiesToSet.forEach(({ name, value, options }) =>
+              response.cookies.set(name, value, options)
+            );
           },
         },
       },
     );
+
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
       return NextResponse.redirect(new URL("/admin", request.url));
     }
-    return NextResponse.next();
+    return response;
   }
 
-  // If Supabase is not configured, allow access (development mode)
   if (!hasSupabaseConfig) {
     if (pathname === "/login") {
-      return NextResponse.redirect(new URL("/admin", request.url));
+      return NextResponse.redirect(new URL("/admin/login", request.url));
     }
     return NextResponse.next();
   }
+
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+          response = NextResponse.next({
+            request: {
+              headers: request.headers,
+            },
+          });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          );
         },
       },
     },
@@ -62,13 +94,13 @@ export async function middleware(request: Request) {
   if (pathname.startsWith("/admin")) {
     if (!session) {
       const redirectUrl = new URL("/admin/login", request.url);
-      const redirectTo = requestUrl.pathname + requestUrl.search;
+      const redirectTo = pathname + requestUrl.search;
       if (redirectTo && redirectTo !== "/admin/login") {
         redirectUrl.searchParams.set("redirectTo", redirectTo);
       }
       return NextResponse.redirect(redirectUrl);
     }
-    return NextResponse.next();
+    return response;
   }
 
   // Redirect authenticated users away from login page
@@ -76,7 +108,7 @@ export async function middleware(request: Request) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {

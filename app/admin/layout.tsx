@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { getSession, getCurrentUser, isAdmin } from "@/lib/auth/actions";
 import { AdminSidebar } from "@/components/admin/sidebar";
 import { AdminHeader } from "@/components/admin/header";
@@ -8,6 +9,14 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || headersList.get("x-invoke-path") || "";
+  
+  // Allow access to login page without auth checks
+  if (pathname.includes("/admin/login") || pathname.endsWith("/login")) {
+    return <>{children}</>;
+  }
+
   const session = await getSession();
   const user = await getCurrentUser();
 
