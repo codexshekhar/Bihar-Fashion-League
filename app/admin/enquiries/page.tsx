@@ -3,7 +3,6 @@ export const dynamic = "force-dynamic";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getSession, isAdmin } from "@/lib/auth/actions";
-import { format } from "date-fns";
 
 export default async function AdminEnquiriesPage() {
   const session = await getSession();
@@ -51,7 +50,7 @@ export default async function AdminEnquiriesPage() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-[#66645F]">{enq.subject || "-"}</td>
                   <td className="px-6 py-4 text-sm text-[#66645F] max-w-xs truncate">{enq.message}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-[#66645F]">
-                    {enq.created_at ? format(new Date(enq.created_at), "MMM dd, yyyy") : "-"}
+                    {enq.created_at ? new Date(enq.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-'}
                   </td>
                 </tr>
               ))}

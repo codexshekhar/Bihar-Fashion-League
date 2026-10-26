@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getSession, isAdmin } from "@/lib/auth/actions";
 import Link from "next/link";
-import { format } from "date-fns";
 
 export default async function AdminModelsPage() {
   const session = await getSession();
@@ -61,7 +60,7 @@ export default async function AdminModelsPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-[#66645F]">
-                    {app.created_at ? format(new Date(app.created_at), "MMM dd, yyyy") : "-"}
+                    {app.created_at ? new Date(app.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
                     <Link href={`/admin/models/${app.id}`} className="text-[#171717] hover:underline">
