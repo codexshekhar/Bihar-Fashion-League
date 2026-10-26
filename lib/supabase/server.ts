@@ -2,7 +2,9 @@ import { createServerClient as createSupabaseClient, type CookieOptions } from "
 import { cookies } from "next/headers";
 
 function getSupabaseAnonKey(): string {
-  return process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  // Prefer legacy ANON_KEY (JWT format) as it's the established key for this project.
+  // Fall back to PUBLISHABLE_KEY if ANON_KEY is not set.
+  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "";
 }
 
 export async function createClient() {
