@@ -47,11 +47,17 @@ const GALLERY_FILES = [
   "BFL_2025_38.jpeg",
   "BFL_2025_39.jpeg",
   "BFL_2025_40.jpeg",
+  "IMG_0139.JPG",
+  "IMG_4503.PNG",
+  "IMG_5040 (1).JPG",
+  "IMG_5348.JPG",
+  "IMG_5349.JPG",
+  "IMG_5350.PNG",
 ];
 
 const GALLERY_ITEMS = GALLERY_FILES.map((file, index) => ({
   id: `gallery-${index + 1}`,
-  src: `/images/Gallery/${file}`,
+  src: `/images/Gallery/${encodeURIComponent(file)}`,
   alt: `Bihar Fashion League gallery image ${index + 1}`,
 }));
 
