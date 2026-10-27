@@ -102,10 +102,13 @@ export default function Footer() {
             href="https://www.astracodex.studio/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-1.5 text-xs text-[#B5B5B5] hover:text-white transition-colors"
+            className="group flex items-center gap-1.5 hover:text-white transition-colors"
           >
-            <span>Designed, Developed &amp; Managed by</span>
-            <span className="text-white">AstraCodex Technologies</span>
+            <img
+              src="/images/astracodex_white_Logo.png"
+              alt="AstraCodex Technologies logo"
+              className="h-8 w-auto object-contain"
+            />
             <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
           </a>
         </div>
