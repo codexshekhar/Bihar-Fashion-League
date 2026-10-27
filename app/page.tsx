@@ -14,6 +14,7 @@ import { PressAndNewsSection } from "@/components/home/PressAndNews";
 import { CollabCtaSection } from "@/components/home/CollabCta";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FeaturedParticipantsSection } from "@/components/home/FeaturedParticipants";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 
 export default function HomePage() {
   return (
@@ -226,9 +227,10 @@ export default function HomePage() {
       <FashionCategoriesSection />
       <UpcomingEventSection />
       <FashionCategoriesSection />
-      <FaqSection />
+<FaqSection />
+<TestimonialsSection />
 
-      <Footer />
+<Footer />
     </main>
   );
 }
