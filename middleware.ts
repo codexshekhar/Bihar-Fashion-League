@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { LAUNCH_TIMESTAMP } from "@/lib/launch-gate";
 
 const EXEMPT_EXACT = ["/favicon.ico", "/robots.txt", "/sitemap.xml"];
-const EXEMPT_PREFIXES = ["/api/", "/_next/", "/launch", "/admin/login"];
+const EXEMPT_PREFIXES = ["/api/", "/_next/", "/launch", "/admin/login", "/images/"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
