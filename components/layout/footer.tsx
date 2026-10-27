@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Camera, Mail, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 
 const FOOTER_LINKS = [
   {
@@ -31,14 +31,35 @@ const FOOTER_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { name: "Instagram", href: "https://www.instagram.com/biharfashionleague", icon: <Camera className="h-4 w-4" /> },
-  { name: "LinkedIn", href: "https://www.linkedin.com/company/biharfashionleague/", icon: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-      <path d="M19 0h-14C9.471 0 8 1.472 8 3.018v18H6V10h2V7.391C8 5.564 9.562 4 11.534 4c1.966 0 2.363 1.557 2.363 2.39v2.61h3V10h3v8h2V3.018C22 1.472 20.528 0 19 0z"/>
-      <path d="M7 16c0-.552-.447-1-1-1s-1 .448-1 1c0 .552.447 1 1 1s1-.448 1-1m11 0c0-.552-.447-1-1-1s-1 .448-1 1c0 .552.447 1 1 1s1-.448 1-1m-10-9h-2v2h2v-2zm-4-2h2v2h-2V5z"/>
-    </svg>
-  ) },
-  { name: "Email", href: "mailto:piyush@biharfashionleague.com", icon: <Mail className="h-4 w-4" /> },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/biharfashionleague",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+        <defs>
+          <linearGradient id="ig-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#405DE6" />
+            <stop offset="50%" stopColor="#C13584" />
+            <stop offset="100%" stopColor="#515BD4" />
+          </linearGradient>
+        </defs>
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" stroke="url(#ig-gradient)" strokeWidth="2" />
+        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" stroke="url(#ig-gradient)" strokeWidth="2" strokeLinecap="round" />
+        <path d="M17.5 17.5a2 2 0 11-4 0 2 2 0 014 0z" stroke="url(#ig-gradient)" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/biharfashionleague/",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5" className="h-4 w-4">
+        <path d="M19 0h-14C9.471 0 8 1.472 8 3.018v18H6V10h2V7.391C8 5.564 9.562 4 11.534 4c1.966 0 2.363 1.557 2.363 2.39v2.61h3V10h3v8h2V3.018C22 1.472 20.528 0 19 0z"/>
+        <path d="M7 16c0-.552-.447-1-1-1s-1 .448-1 1c0 .552.447 1 1 1s1-.448 1-1m11 0c0-.552-.447-1-1-1s-1 .448-1 1c0 .552.447 1 1 1s1-.448 1-1m-10-9h-2v2h2v-2zm-4-2h2v2h-2V5z"/>
+      </svg>
+    ),
+  },
+  { name: "Email", href: "mailto:piyush@biharfashionleague.com", icon: <Mail className="h-4 w-4 text-[#66645F]" /> },
 ];
 
 export default function Footer() {
