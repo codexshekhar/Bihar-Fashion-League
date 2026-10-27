@@ -53,6 +53,9 @@ const GALLERY_FILES = [
   "IMG_5348.JPG",
   "IMG_5349.JPG",
   "IMG_5350.PNG",
+  "WhatsApp GIF 2026-10-27 at 16.41.22.gif",
+  "WhatsApp Image 2026-10-27 at 16.50.05.jpeg",
+  "WhatsApp Image 2026-10-27 at 16.50.08.jpeg",
 ];
 
 const GALLERY_ITEMS = GALLERY_FILES.map((file, index) => ({
