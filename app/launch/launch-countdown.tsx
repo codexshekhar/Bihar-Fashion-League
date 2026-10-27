@@ -44,11 +44,11 @@ export default function LaunchCountdown() {
         <div className="relative inline-block mb-2">
           <Link href="/" aria-label="Bihar Fashion League home">
             <Image
-              src="/images/BFl-logo/bfl-logo-white.png"
+              src="/images/BFl-logo/bfl-black-logo.png"
               alt="Bihar Fashion League"
               width={200}
               height={80}
-              className="object-contain drop-shadow-[0_0_16px_rgba(0,0,0,0.4)]"
+              className="object-contain invert drop-shadow-[0_0_16px_rgba(0,0,0,0.4)]"
               loading="eager"
             />
           </Link>
