@@ -32,6 +32,12 @@ const FOOTER_LINKS = [
 
 const SOCIAL_LINKS = [
   { name: "Instagram", href: "https://www.instagram.com/biharfashionleague", icon: <Camera className="h-4 w-4" /> },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/biharfashionleague/", icon: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+      <path d="M19 0h-14C9.471 0 8 1.472 8 3.018v18H6V10h2V7.391C8 5.564 9.562 4 11.534 4c1.966 0 2.363 1.557 2.363 2.39v2.61h3V10h3v8h2V3.018C22 1.472 20.528 0 19 0z"/>
+      <path d="M7 16c0-.552-.447-1-1-1s-1 .448-1 1c0 .552.447 1 1 1s1-.448 1-1m11 0c0-.552-.447-1-1-1s-1 .448-1 1c0 .552.447 1 1 1s1-.448 1-1m-10-9h-2v2h2v-2zm-4-2h2v2h-2V5z"/>
+    </svg>
+  ) },
   { name: "Email", href: "mailto:piyush@biharfashionleague.com", icon: <Mail className="h-4 w-4" /> },
 ];
 
