@@ -1,25 +1,32 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { LAUNCH_TIMESTAMP } from "@/lib/launch-gate";
+
+const EXEMPT_EXACT = ["/favicon.ico", "/robots.txt", "/sitemap.xml"];
+const EXEMPT_PREFIXES = ["/api/", "/_next/", "/launch", "/admin/login"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const now = Date.now();
 
-  // Never redirect the admin login page - always allow it to render
-  if (pathname === "/admin/login") {
-    return NextResponse.next();
+  const isExempt =
+    EXEMPT_EXACT.includes(pathname) ||
+    EXEMPT_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+
+  // Before launch: redirect all non-exempt page routes to countdown
+  if (now < LAUNCH_TIMESTAMP && !isExempt) {
+    return NextResponse.redirect(new URL("/launch", request.url));
   }
 
+  // After launch: existing auth redirect logic
   if (pathname === "/login") {
     return NextResponse.redirect(new URL("/admin/login", request.url));
-  }
-
-  if (pathname.startsWith("/admin")) {
-    // Let the route/layout handle auth; middleware should not redirect to cause loops
-    return NextResponse.next();
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/login", "/admin/:path*", "/login"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+  ],
 };
