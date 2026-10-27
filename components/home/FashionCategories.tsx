@@ -176,9 +176,7 @@ export function FashionCategoriesSection() {
             Explore the registration process and find the category that best matches your profile.
           </p>
           <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
-            <Link href="/register/model">
-              Register Now <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+<Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer">Register Now <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
         </div>
       </div>

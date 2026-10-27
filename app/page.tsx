@@ -35,9 +35,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
               <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
-                <Link href="/register/model">
-                  Register Now
-                </Link>
+<Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer">Register Now</Link>
               </Button>
                 <Button asChild variant="ghost" className="h-11 px-7 text-[#171717] hover:bg-[#171717]/5 text-sm tracking-wide">
                   <Link href="/gallery">
@@ -179,9 +177,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
-                  <Link href="/register/model/apply">
-                    Register Now
-                  </Link>
+<Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer">Register Now</Link>
                 </Button>
                 <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
                   <Link href="/gallery">

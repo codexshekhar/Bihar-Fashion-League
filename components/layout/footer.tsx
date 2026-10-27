@@ -15,7 +15,7 @@ const FOOTER_LINKS = [
   {
     title: "GET INVOLVED",
     items: [
-      { name: "Register", href: "/register/model" },
+      { name: "Register", href: "https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform", target: "_blank" },
       { name: "Partner With BFL", href: "/partners" },
       { name: "Contact", href: "/contact" },
     ],
@@ -83,6 +83,8 @@ export default function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      target={item.target}
+                      rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                       className="text-sm text-[#B5B5B5] hover:text-white transition-colors"
                     >
                       {item.name}

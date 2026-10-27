@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function RegisterPage() {
-  redirect("/register/model");
+  return null;
 }
