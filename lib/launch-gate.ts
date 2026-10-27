@@ -1,5 +1,7 @@
 // Launch timestamp: 27 October 2026, 6:00 PM IST (Asia/Kolkata = UTC+5:30)
-export const LAUNCH_TIMESTAMP = new Date("2026-10-27T18:00:00+05:30").getTime();
+// TEMPORARILY PAUSED: set to past timestamp so full site is accessible immediately.
+// To resume countdown, change back to: new Date("2026-10-27T18:00:00+05:30").getTime()
+export const LAUNCH_TIMESTAMP = new Date("2026-01-01T00:00:00+05:30").getTime();
 
 export function hasLaunched(): boolean {
   return Date.now() >= LAUNCH_TIMESTAMP;

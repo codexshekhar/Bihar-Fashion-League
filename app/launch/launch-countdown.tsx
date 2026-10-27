@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-const LAUNCH_TIMESTAMP = new Date("2026-10-27T18:00:00+05:30").getTime();
+import { LAUNCH_TIMESTAMP } from "@/lib/launch-gate";
 
 export default function LaunchCountdown() {
   const [remaining, setRemaining] = useState<number>(
