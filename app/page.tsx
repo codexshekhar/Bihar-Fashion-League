@@ -90,6 +90,8 @@ export default function HomePage() {
           </div>
           <PartnersSection
             sponsors={[
+              { id: "astracodex", name: "AstraCodex Technologies", logoUrl: "/images/Sponsers/astracodex_logo.png", logoAlt: "AstraCodex Technologies", tier: "title" },
+              { id: "nightjar", name: "Nightjar", logoUrl: "/images/Sponsers/NIGHT%20JAR%20logo%20(2).png", logoAlt: "Nightjar", tier: "title" },
               { id: "idt", name: "IDT", logoUrl: "/images/Sponsers/IDT%20Logo%20White.png", logoAlt: "IDT", tier: "title" },
               { id: "sla", name: "SLA", logoUrl: "/images/Sponsers/SLA%20LOGO%20WITH%20TM.png", logoAlt: "SLA", tier: "event" },
               { id: "s1", name: "Sponsor", logoUrl: "/images/Sponsers/WhatsApp%20Image%202026-10-25%20at%2023.18.46.jpeg", logoAlt: "Sponsor", tier: "collaborator" },
