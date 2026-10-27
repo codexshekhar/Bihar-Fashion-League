@@ -16,7 +16,7 @@ const FAQS: FaqItemData[] = [
     answer: (
       <>
         You can begin your application through the official model registration page. Complete the required details, provide the requested information, and submit your application.{" "}
-        <Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer" className="text-[#171717] underline underline-offset-4 hover:opacity-80">Register Now</Link>
+        <Link href="https://forms.gle/GxQmh5UVjoWSktYz6" target="_blank" rel="noopener noreferrer" className="text-[#171717] underline underline-offset-4 hover:opacity-80">Register Now</Link>
       </>
     ),
   },

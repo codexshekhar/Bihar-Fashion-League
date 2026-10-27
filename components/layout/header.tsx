@@ -91,7 +91,7 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center gap-4 shrink-0">
             <Button asChild size="sm" className="h-9 px-6 text-sm font-medium bg-[#171717] text-white hover:bg-[#171717]/90">
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer">Register Now</Link>
+              <Link href="https://forms.gle/GxQmh5UVjoWSktYz6" target="_blank" rel="noopener noreferrer">Register Now</Link>
             </Button>
           </div>
 
@@ -148,7 +148,7 @@ export default function Header() {
             </nav>
             <div className="px-4 sm:px-6 pb-6 pt-4">
               <Button asChild size="lg" className="w-full h-12 bg-[#171717] text-white hover:bg-[#171717]/90">
-                <Link href="/register/model/apply" onClick={() => setIsOpen(false)}>Register Now</Link>
+                <Link href="https://forms.gle/GxQmh5UVjoWSktYz6" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>Register Now</Link>
               </Button>
             </div>
           </div>

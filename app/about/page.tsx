@@ -189,7 +189,7 @@ export default function AboutPage() {
               </div>
               <div className="mt-8">
                 <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
-                  <Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer">Register as a Model <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link href="https://forms.gle/GxQmh5UVjoWSktYz6" target="_blank" rel="noopener noreferrer">Register as a Model <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
               </div>
             </div>
@@ -340,7 +340,7 @@ export default function AboutPage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Button asChild className="h-11 px-7 bg-[#171717] text-white hover:bg-[#171717]/90 text-sm tracking-wide">
-                  <Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer">Register Now</Link>
+                  <Link href="https://forms.gle/GxQmh5UVjoWSktYz6" target="_blank" rel="noopener noreferrer">Register Now</Link>
                 </Button>
                 <Button asChild variant="ghost" className="h-11 px-7 text-white hover:bg-white/10 text-sm tracking-wide">
                   <Link href="/partners">

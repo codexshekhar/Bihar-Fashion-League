@@ -212,7 +212,7 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <p className="text-xs tracking-[0.28em] uppercase text-[#66645F]">QUICK LINKS</p>
                 <div className="flex flex-wrap gap-4">
-                  <Link href="https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform" target="_blank" rel="noopener noreferrer" className="text-sm text-[#66645F] hover:text-[#171717] transition-colors underline-offset-4 hover:underline">Model Registration</Link>
+                  <Link href="https://forms.gle/GxQmh5UVjoWSktYz6" target="_blank" rel="noopener noreferrer" className="text-sm text-[#66645F] hover:text-[#171717] transition-colors underline-offset-4 hover:underline">Model Registration</Link>
                   <Link href="/partners" className="text-sm text-[#66645F] hover:text-[#171717] transition-colors underline-offset-4 hover:underline">
                     Partnership Inquiries
                   </Link>

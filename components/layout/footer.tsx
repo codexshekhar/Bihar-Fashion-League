@@ -15,7 +15,7 @@ const FOOTER_LINKS = [
   {
     title: "GET INVOLVED",
     items: [
-      { name: "Register", href: "https://docs.google.com/forms/d/e/1FAIpQLSff4hymOLnRuB35asReVvcntGtDOzCOYWbQFO2vqMMy5t85bQ/viewform", target: "_blank" },
+      { name: "Register", href: "https://forms.gle/GxQmh5UVjoWSktYz6", target: "_blank" },
       { name: "Partner With BFL", href: "/partners" },
       { name: "Contact", href: "/contact" },
     ],
