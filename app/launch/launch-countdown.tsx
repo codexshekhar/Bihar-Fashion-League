@@ -41,14 +41,14 @@ export default function LaunchCountdown() {
   return (
     <div className="min-h-screen bg-[#171717] text-[#F8F7F0] flex flex-col items-center justify-center p-6">
       <div className="text-center space-y-12">
-        <div className="relative inline-block">
+        <div className="relative inline-block mb-2">
           <Link href="/" aria-label="Bihar Fashion League home">
             <Image
-              src="/images/BFl-logo/bfl-black-logo.png"
+              src="/images/BFl-logo/bfl-logo-white.png"
               alt="Bihar Fashion League"
-              width={160}
-              height={60}
-              className="object-contain invert drop-shadow-[0_0_12px_rgba(255,255,255,0.15)]"
+              width={200}
+              height={80}
+              className="object-contain drop-shadow-[0_0_16px_rgba(0,0,0,0.4)]"
               loading="eager"
             />
           </Link>
